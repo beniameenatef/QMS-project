@@ -18,7 +18,7 @@ import '../ScreenPageDrawer/توزيع الطلاب.dart';
 class AddEditStudentDistributionScreen extends StatefulWidget {
   const AddEditStudentDistributionScreen({Key? key, this.object})
       : super(key: key);
-  final Datum? object;
+  final DatumSD? object;
 
   @override
   _AddEditStudentDistributionScreenState createState() =>

@@ -7,7 +7,9 @@ class feedback extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Center(child: Text('feedback'),),
+        Center(
+          child: Text('feedback'),
+        ),
       ],
     );
   }

@@ -2,6 +2,7 @@
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/login/login.dart';
 import 'package:design_ui/modules/on%20boarding/classes.dart';
+import 'package:design_ui/shared/shared%20preference.dart';
 
 
 import 'package:flutter/cupertino.dart';
@@ -37,8 +38,16 @@ class onBoardingScrean extends StatelessWidget {
         // title: Text('hello=>'),
         actions: [TextButton(onPressed: ()
         {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => loginqualityapp()));
+          cachehelper.savedata(key: 'onboarding', value: true).then((value)
+          {
+            if(value)
+            {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => loginqualityapp()));
+            }
+
+          });
+
         }, child: const Padding(
           padding: EdgeInsetsDirectional.only(end: 20),
           child: Text('Skip>',style: TextStyle(fontSize: 20,color: Colors.white),),
@@ -91,9 +100,17 @@ class onBoardingScrean extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn);
                     if(islast)
                     {
-                      Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => loginqualityapp()),
-                      );
+                      cachehelper.savedata(key: 'onboarding', value: true).then((value)
+                      {
+                        if(value)
+
+                        {
+                          Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => loginqualityapp()),
+                          );
+                        }
+                      });
+
                     }
                   },
                   child:Icon(Icons.arrow_forward_ios_outlined),

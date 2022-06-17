@@ -10,19 +10,37 @@ class cachehelper
   }
 
   static dynamic getdata({
+
     @required String? key,
   })
   {
-   return sharedpreferences!.get(key!);
+    return sharedpreferences!.get(key!);
   }
   static Future<bool>savedata(
-  {
-  @required String? key,
-  @required dynamic value,
-})async{
+      {
+
+        @required String? key,
+        @required dynamic value,
+      })async{
     if(value is String) return await sharedpreferences!.setString(key!, value);
     if(value is int) return await sharedpreferences!.setInt(key!, value);
     if(value is bool) return await sharedpreferences!.setBool(key!, value);
     return await sharedpreferences!.setDouble(key!, value!);
   }
+  // static Future<bool> removeData({
+  //   required String key,
+  // }) async
+  // {
+  //   return await shared!.remove(key);
+  // }
+  static Future<bool>deletedata(
+      {
+        @required String? key,
+      }
+      )async
+  {
+    return await sharedpreferences!.remove(key!);
+
+  }
+
 }

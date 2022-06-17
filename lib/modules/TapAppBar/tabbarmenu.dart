@@ -26,10 +26,12 @@ class SelectionScreen extends StatelessWidget {
               labelColor: Color(0xFF054978),
               labelPadding: EdgeInsets.zero,
               margin: EdgeInsets.only(bottom: 10),
-              padding: EdgeInsetsDirectional.all(10),
+              // padding: EdgeInsetsDirectional.all(10),
               indicatorColor: Color(0xFFF1770D),
+
             ),
             tabs: const [
+
               Text(
                 'Overview',
                 style: TextStyle(

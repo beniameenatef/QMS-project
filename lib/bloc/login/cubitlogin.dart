@@ -1,5 +1,13 @@
+import 'dart:convert';
+
 import 'package:design_ui/bloc/login/stateslogin.dart';
+import 'package:design_ui/models/userdatamodel.dart';
+import 'package:design_ui/modules/login/user%20data.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
+
 
 class logincubit extends Cubit<qualityloginstates> {
   logincubit() : super(qualityloginInitialState());
@@ -20,4 +28,167 @@ void branch()
   isbrache=!isbrache;
   emit(brancheSuccessState());
 }
+  Users?userdatamodel;
+
+  Future LoginUser({String? emaill, String? password}) async {
+emit(loginloadingstate());
+    dynamic api = 'https://qms-application.herokuapp.com/api/auth/local?populate=*';
+
+  await http.post(Uri.parse(api),
+        body: {
+          "identifier": "${emaill.toString()}",
+          "password": "${password.toString()}"
+        }
+    ).then((value)
+    {
+
+      if (value.statusCode == 200) {
+        print("Account Login in");
+        var data = jsonDecode(value.body.toString());
+        print(data["jwt"]);
+        jwt = data["jwt"];
+        username=data["user"]["username"];
+        email=data["user"]["email"];
+        role=data["user"]["visible"];
+        //avatar=data["user"]["avatar"];
+        print(jwt);
+        print(username);
+        print(email);
+
+        print(value.body);
+         userdatamodel =Users.fromJson(data);
+         emit(loginsuccessstate(userdatamodel));
+        Fluttertoast.showToast(
+          msg: "تم التسجيل بنجاح ",
+          textColor: Colors.white,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.indigo,);
+        return userdatamodel;
+
+      } else {
+        print(value.body);
+        throw Exception('Failed to log in user.');
+      }
+    }).catchError((error)
+    {
+      emit(loginerrorstate(error.toString()));
+      Fluttertoast.showToast(
+        msg: "خطأ في التسجيل اعد كتابه البريد الالكتروني او الرقم السري مره اخري",
+        textColor: Colors.white,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.indigo,);
+      print(error.toString());
+    });
+
+  }
+//   Future<Userdatalogin?> LoginUser(
+//       {
+//         String ?emaill,
+//         String? password
+//       }) async {
+// emit(loginloadingstate());
+//     dynamic api = 'https://qms-application.herokuapp.com/api/auth/local?populate=*';
+//
+//     await http.get(Uri.parse(api),
+//         headers:  {
+//           "identifier": "${emaill.toString()}",
+//           "password": "${password.toString()}",
+//           // "jwt":"jwt"
+//         }
+//     ).then((value)
+//     {
+//       if (value.statusCode == 200) {
+//         print("Account Login in");
+//         var data = jsonDecode(value.body.toString());
+//         //print(data["jwt"]);
+//         jwt = data["jwt"];
+//         username=data["user"]["username"];
+//         email=data["user"]["email"];
+//         //avatar=data["user"]["avatar"];
+//         print(jwt);
+//
+//
+//         print(username);
+//         print(email);
+//
+//         print(value.body);
+//          userdatamodel= Userdatalogin.fromJson(data);
+//          emit(loginsuccessstate(userdatamodel));
+//         Fluttertoast.showToast(
+//           msg: "Login Successfully",
+//           textColor: Colors.white,
+//           toastLength: Toast.LENGTH_SHORT,
+//           gravity: ToastGravity.BOTTOM,
+//           backgroundColor: Colors.indigo,);
+//         return userdatamodel;
+//
+//       } else {
+//         print(value.body);
+//         throw Exception('Failed to log in user.');
+//       }
+//     }).catchError((error)
+//     {
+//
+//       emit(loginerrorstate(error.toString()));
+//       Fluttertoast.showToast(
+//         msg: "Please Again Enter Your Email And Password",
+//         textColor: Colors.white,
+//         toastLength: Toast.LENGTH_SHORT,
+//         gravity: ToastGravity.BOTTOM,
+//         backgroundColor: Colors.indigo,);
+//       print(error.toString());
+//     });
+//
+//
+//   }
+
+  Future SignUpUser({String ?name, String ?email, String ?password,
+  }) async {
+    emit(registerloadingstate());
+    dynamic api = 'https://qms-application.herokuapp.com/api/auth/local/register';
+
+     await http.post(Uri.parse(api),
+        body: {
+
+          "username": "${name.toString()}",
+          // 'Authorization': jwt??'',
+          "email": "${email.toString()}",
+          "password": "${password.toString()}",
+         "visible":"guest"
+        }
+    ).then((value)
+    {
+
+      if (value.statusCode == 200) {
+        print("Account Created");
+        var data = jsonDecode(value.body.toString());
+        emit(registersuccessstate(userdatamodel));
+        Fluttertoast.showToast(
+          msg: "تم الانشاء بنجاح ",
+          textColor: Colors.white,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.indigo,);
+        print(data["jwt"]);
+      } else {
+        print(value.body);
+        throw Exception('Failed to sign up user.');
+      }
+    }).catchError((error)
+     {
+       emit(registererrorstate(error.toString()));
+       Fluttertoast.showToast(
+         msg: "Failed ",
+         textColor: Colors.white,
+         toastLength: Toast.LENGTH_SHORT,
+         gravity: ToastGravity.BOTTOM,
+         backgroundColor: Colors.indigo,);
+       print(error.toString());
+     });
+
+  }
+
+
 }

@@ -2,6 +2,7 @@ import 'package:design_ui/bloc/home/homecubit.dart';
 import 'package:design_ui/bloc/home/homestate.dart';
 import 'package:design_ui/models/surveymodel.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
+import 'package:design_ui/modules/Edit/AddEditSurveyItemScreen.dart';
 import 'package:design_ui/modules/datialesHomeScreen/detailshome.dart';
 import 'package:design_ui/network/http/HttpDelete.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
@@ -116,13 +117,13 @@ class Alasttla3at extends StatelessWidget {
                                   ],
                                   onLongPress: () {
                                     // setState(() {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddEditSurveyScreen(
-                                                      object: snapshot.data!
-                                                          .data![index])));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddEditSurveyScreen(
+                                                    object: snapshot
+                                                        .data!.data![index])));
                                     // });
                                   });
                             }),
@@ -150,10 +151,10 @@ class Alasttla3at extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddEditSurveyScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddEditSurveyScreen()));
               // });
             },
             backgroundColor: AppColors.blue,

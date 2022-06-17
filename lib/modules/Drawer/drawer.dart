@@ -1,6 +1,7 @@
 import 'package:design_ui/bloc/login/cubitlogin.dart';
 import 'package:design_ui/bloc/login/stateslogin.dart';
 import 'package:design_ui/modules/Drawer/customDrawer.dart';
+import 'package:design_ui/modules/login/user%20data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,6 +96,7 @@ class _AppDrawerState extends State<AppDrawer> with SingleTickerProviderStateMix
           double scaleVal = 1 - (animationVal *  0.3);
           return Stack(
             children: <Widget>[
+              // (user1 == null)?user1drawer():
               CustomDrawer(),
               Transform(
                 alignment: Alignment.centerLeft,

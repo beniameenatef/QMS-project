@@ -13,7 +13,7 @@ import '../../network/http/HttpSearch.dart';
 
 class AddEditGraduatedNumberScreen extends StatefulWidget {
   const AddEditGraduatedNumberScreen({Key? key, this.object}) : super(key: key);
-  final Datum? object;
+  final GraduatedNumberData? object;
 
   @override
   _AddEditGraduatedNumberScreenState createState() =>
@@ -41,15 +41,16 @@ class _AddEditGraduatedNumberScreenState
     year = GetOneYears();
     graduatednumber = GetGraduatedNumbers();
     _CSController =
-        TextEditingController(text: widget.object?.attributes?.cs?.number);
-    _ISController = TextEditingController(
-        text: widget.object?.attributes?.attributesIs?.number);
+        TextEditingController(text: widget.object?.attributes!.CS!.Number);
+    _ISController =
+        TextEditingController(text: widget.object?.attributes?.IS!.Number);
     _AIController =
-        TextEditingController(text: widget.object?.attributes?.ai?.number);
+        TextEditingController(text: widget.object?.attributes!.AI!.Number);
     _NIController =
-        TextEditingController(text: widget.object?.attributes?.ni?.number);
+        TextEditingController(text: widget.object?.attributes!.NI!.Number);
     selectedValue =
-        widget.object?.attributes?.academicYear?.data?.attributes?.year;
+        widget.object?.attributes?.academicYear?.data?.attributes!.Year;
+    id = widget.object?.attributes?.academicYear?.data?.id;
   }
 
   @override
@@ -260,17 +261,21 @@ class _AddEditGraduatedNumberScreenState
                                           AlertText = 'ادخل بعض البيانات';
                                         }
                                       } else {
-                                        homecubit
-                                            .get(context)
-                                            .PutGraduatedNumber(
-                                                year: widget.object!.id!,
-                                                id: id!,
-                                                cs: _CSController.text,
-                                                Is: _ISController.text,
-                                                ai: _AIController.text,
-                                                ni: _NIController.text);
-                                        AlertText = 'تم التعديل';
-                                        Navigator.pop(context);
+                                        if (form!.validate()) {
+                                          homecubit
+                                              .get(context)
+                                              .PutGraduatedNumber(
+                                                  id: widget.object!.id!,
+                                                  year: id!,
+                                                  cs: _CSController.text,
+                                                  Is: _ISController.text,
+                                                  ai: _AIController.text,
+                                                  ni: _NIController.text);
+                                          AlertText = 'تم التعديل';
+                                          Navigator.pop(
+                                            context,
+                                          );
+                                        }
                                       }
                                     });
                                   },

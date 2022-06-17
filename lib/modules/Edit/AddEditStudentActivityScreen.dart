@@ -17,7 +17,7 @@ import '../ScreenPageDrawer/نشاط الطلاب.dart';
 
 class AddEditStudentActivityScreen extends StatefulWidget {
   const AddEditStudentActivityScreen({Key? key, this.object}) : super(key: key);
-  final Datum? object;
+  final DatumSA? object;
 
   @override
   _AddEditStudentActivityScreenState createState() =>

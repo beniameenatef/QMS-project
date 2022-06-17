@@ -14,7 +14,7 @@ import '../ScreenPageDrawer/المعامل.dart';
 
 class AddEditLabScreen extends StatefulWidget {
   const AddEditLabScreen({Key? key, this.object}) : super(key: key);
-  final Datum? object;
+  final Datumlab? object;
 
   @override
   _AddEditLabScreenState createState() => _AddEditLabScreenState();
