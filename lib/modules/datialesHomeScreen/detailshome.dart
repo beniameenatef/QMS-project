@@ -1,7 +1,9 @@
 import 'package:design_ui/bloc/home/homecubit.dart';
 import 'package:design_ui/bloc/home/homestate.dart';
+import 'package:design_ui/bloc/login/cubitlogin.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
 import 'package:design_ui/modules/login/user%20data.dart';
+import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/shared/shared%20preference.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,7 @@ class detailshomePage extends StatelessWidget {
     return BlocConsumer<homecubit, qualityhomestates>(
       listener: (context, state) {},
       builder: (context, state) {
+        logincubit.get(context). GetUserData(jwt: jwt);
         var cubitnavbar = homecubit.get(context);
         return Scaffold(
           appBar: AppBar(
@@ -31,7 +34,12 @@ class detailshomePage extends StatelessWidget {
             elevation: 0,
             bottomOpacity: 0,
             // toolbarHeight: 80,
+            actions: [
+              IconButton(onPressed: (){
+               logincubit.get(context). GetUserData(jwt: jwt);
 
+              }, icon: Icon(Icons.keyboard_option_key),color: Colors.red,)
+            ],
             leading: (role == null)? IconButton(
               color: Color(0xFF2F2F31),
               onPressed: () {
@@ -122,8 +130,8 @@ class detailshomePage extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: 'profile'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: 'settings'),
+               BottomNavigationBarItem(
+                  icon: Icon(Icons.settings), label: 'Creators'),
             ],
           ),
         );

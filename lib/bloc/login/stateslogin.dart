@@ -43,6 +43,37 @@ class registererrorstate extends qualityloginstates {
    registererrorstate(this.error);
 }
 
+class putuserdataloadingstate extends qualityloginstates {}
+class putuserdatasuccessstate extends qualityloginstates {
+
+
+  final  Users? userdatamodel;
+
+  putuserdatasuccessstate(this.userdatamodel);
+
+
+}
+class putuserdataerrorstate extends qualityloginstates {
+   final String? error;
+
+   putuserdataerrorstate(this.error);
+}
+class getuserdataloadingstate extends qualityloginstates {}
+class getuserdatasuccessstate extends qualityloginstates {
+
+
+  final  Users? userdatamodel;
+
+  getuserdatasuccessstate(this.userdatamodel);
+
+
+}
+class getuserdataerrorstate extends qualityloginstates {
+   final String? error;
+
+   getuserdataerrorstate(this.error);
+}
+
 
 
 

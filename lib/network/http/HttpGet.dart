@@ -20,6 +20,7 @@ import '../../models/Mstaffmodel.dart';
 import '../../models/Research.dart';
 import '../../models/surveyitemmodel.dart';
 import '../../modules/Drawer/yeardropdwon.dart';
+import '../../modules/login/user data.dart';
 
 Future<Year> GetYears() async {
   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/academic-years?populate=deep,3'));
@@ -234,5 +235,34 @@ Future<List<Users>> GetUser() async {
     throw Exception('failed to get user data');
   }
 }
+// Future GetUserData(dynamic jwt) async {
+//   final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/users/me'),
+//       headers:<String , String> {
+//         'Authorization' : 'Bearer ${jwt}',
+//       });
+//
+//
+//   if(response.statusCode==200){
+//     print(response.body);
+//     var data = jsonDecode(response.body.toString());
+//     //print(data["jwt"]);
+//     //jwt = data["jwt"];
+//     username=data["username"];
+//     email=data["email"];
+//     role=data["visible"];
+//     print('new request------------------');
+//     //print(jwt);
+//     print(username);
+//     print(email);
+//     print(role);
+//     print('--------------------------');
+//
+//
+//   }
+//   else
+//   {
+//     throw Exception('failed to get  one user data');
+//   }
+// }
 
 

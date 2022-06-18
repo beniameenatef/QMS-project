@@ -37,7 +37,7 @@ class homecubit extends Cubit<qualityhomestates> {
   List<Widget> screenNavigationbar = [
     homescreen(),
     profile(),
-    setting(),
+    Creators(),
   ];
 
   void changebottomnavifationbar(int index) {

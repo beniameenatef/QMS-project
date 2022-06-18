@@ -59,7 +59,7 @@ void main() async{
   onboarding= cachehelper.getdata(key: 'onboarding');
   // String ?jwt;
   jwt= cachehelper.getdata(key: 'jwt');
-  jwt= cachehelper.getdata(key: 'visible');
+  role= cachehelper.getdata(key: 'visible');
   email= cachehelper.getdata(key: 'email');
   username= cachehelper.getdata(key: 'username');
   Widget widget;

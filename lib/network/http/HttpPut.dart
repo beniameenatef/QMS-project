@@ -19,30 +19,30 @@ import '../../models/surveymodel.dart';
 import '../../models/userdatamodel.dart';
 
 
-
-Future<Users> PutUsers( int id ,String role) async {
-
-  dynamic api = 'https://qms-application.herokuapp.com/api/users/${id}';
-
-  final response = await http.put((Uri.parse(api)), headers:<String , String> {
-    //'Authorization' : 'xyz',
-    'Content-Type': 'application/json; charset=UTF-8',
-  },
-      body: jsonEncode(<String,dynamic>{
-
-        "visible":"${role}"
-
-      })
-  );
-
-  if (response.statusCode == 200) {
-    var data = jsonDecode(response.body.toString());
-    print(data);
-    return Users.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to put user.');
-  }
-}
+//
+// Future<Users> PutUsers( int id ,String role) async {
+//
+//   dynamic api = 'https://qms-application.herokuapp.com/api/users/${id}';
+//
+//   final response = await http.put((Uri.parse(api)), headers:<String , String> {
+//     //'Authorization' : 'xyz',
+//     'Content-Type': 'application/json; charset=UTF-8',
+//   },
+//       body: jsonEncode(<String,dynamic>{
+//
+//         "visible":"${role}"
+//
+//       })
+//   );
+//
+//   if (response.statusCode == 200) {
+//     var data = jsonDecode(response.body.toString());
+//     print(data);
+//     return Users.fromJson(jsonDecode(response.body));
+//   } else {
+//     throw Exception('Failed to put user.');
+//   }
+// }
 // Future<Mstaff> PutMstaff( int id ,String name, String job) async {
 //
 //   dynamic api = 'https://qms-application.herokuapp.com/api/m-staffs/${id}';

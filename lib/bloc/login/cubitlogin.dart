@@ -191,4 +191,76 @@ emit(loginloadingstate());
   }
 
 
+  Future<Users?> PutUsers({int? id, String? role}) async {
+emit(putuserdataloadingstate());
+    dynamic api = 'https://qms-application.herokuapp.com/api/users/${id}';
+
+    final response = await http.put((Uri.parse(api)), headers:<String , String> {
+      //'Authorization' : 'xyz',
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+        body: jsonEncode(<String,dynamic>{
+
+          "visible":"${role}"
+
+        })
+    ).then((value)
+    {
+
+      if (value.statusCode == 200) {
+        var data = jsonDecode(value.body.toString());
+        print(data);
+         userdatamodel= Users.fromJson(jsonDecode(value.body));
+         emit(putuserdatasuccessstate(userdatamodel));
+        return userdatamodel;
+      } else {
+        throw Exception('Failed to put user.');
+      }
+    }).catchError((error)
+    {
+      emit(putuserdataerrorstate(error.toString()));
+      print(error.toString());
+    });
+
+  }
+  Future GetUserData({dynamic jwt}) async {
+    emit(getuserdataloadingstate());
+    final response = await http.get(Uri.parse('https://qms-application.herokuapp.com/api/users/me'),
+        headers:<String , String> {
+          'Authorization' : 'Bearer ${jwt}',
+        }).then((value)
+    {
+      if(value.statusCode==200){
+        print(value.body);
+        var data = jsonDecode(value.body.toString());
+        //print(data["jwt"]);
+        //jwt = data["jwt"];
+        username=data["username"];
+        email=data["email"];
+        role=data["visible"];
+        emit(getuserdatasuccessstate(userdatamodel));
+        print('new request------------------');
+        //print(jwt);
+        print(username);
+        print(email);
+        print(role);
+        print('--------------------------');
+
+
+      }
+      else
+      {
+        throw Exception('failed to get  one user data');
+      }
+    }).catchError((error)
+    {
+      emit(getuserdataerrorstate(error.toString()));
+      print(error.toString());
+    });
+
+
+
+  }
+
+
 }

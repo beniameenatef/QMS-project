@@ -501,6 +501,8 @@
 //   }
 // }
 
+import 'package:design_ui/bloc/login/cubitlogin.dart';
+import 'package:design_ui/bloc/login/stateslogin.dart';
 import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%A8%D8%AD%D8%A7%D8%AB.dart';
 import 'package:design_ui/modules/ScreenPageDrawer/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9%D8%A7%D8%AA.dart';
@@ -515,6 +517,7 @@ import 'package:design_ui/modules/login/user%20data.dart';
 import 'package:design_ui/shared/shared%20preference.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../ScreenPageDrawer/اعداد الخريجين.dart';
 import '../ScreenPageDrawer/الاقسام.dart';
@@ -530,599 +533,601 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Material(
-          color: Color(0xFF054978),
-          child: SafeArea(
-            child: Theme(
-              data: ThemeData(
-                brightness: Brightness.dark,
-              ),
-              child: Padding(
-                  padding: EdgeInsetsDirectional.only(
-                      start: 20, bottom: 40, end: 100),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.only(
-                                  start: 10, top: 70),
-                              //     child:CircleAvatar(
-                              //   radius: 30,
-                              //
-                              // ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Welcome!',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.orange,
-                                  fontSize: 20),
-                            ),
-                            Text(
-                              username.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.orange,
-                                  fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            // Text('${email}',style:
-                            // TextStyle(fontWeight: FontWeight.bold,color: AppColors.orange),),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: 400,
-                          height: 1,
-                          child: Divider(
-                            color: Color(0xfff4f4f8),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              //MyStatefulWidget();
+    return BlocConsumer<logincubit,qualityloginstates>(builder: (context, state) {
+     return WillPopScope(
+         onWillPop: () async => false,
+         child: Material(
+           color: const Color(0xFF054978),
+           child: SafeArea(
+             child: Theme(
+               data: ThemeData(
+                 brightness: Brightness.dark,
+               ),
+               child: Padding(
+                   padding: const EdgeInsetsDirectional.only(
+                       start: 20, bottom: 40, end: 100),
+                   child: SingleChildScrollView(
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: <Widget>[
+                         Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             const Padding(
+                               padding: const EdgeInsetsDirectional.only(
+                                   start: 10, top: 70),
+                               //     child:CircleAvatar(
+                               //   radius: 30,
+                               //
+                               // ),
+                             ),
+                             const SizedBox(
+                               height: 10,
+                             ),
+                             const Text(
+                               'Welcome!',
+                               style: TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: AppColors.orange,
+                                   fontSize: 20),
+                             ),
+                             Text(
+                               username.toString(),
+                               style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   color: AppColors.orange,
+                                   fontSize: 20),
+                             ),
+                             const SizedBox(
+                               height: 5,
+                             ),
+                             // Text('${email}',style:
+                             // TextStyle(fontWeight: FontWeight.bold,color: AppColors.orange),),
+                           ],
+                         ),
+                         const SizedBox(
+                           height: 20,
+                         ),
+                         Container(
+                           width: 400,
+                           height: 1,
+                           child: const Divider(
+                             color: Color(0xfff4f4f8),
+                           ),
+                         ),
+                         const SizedBox(
+                           height: 15,
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               //MyStatefulWidget();
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Al3am_Alacademy()));
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'العام الاكاديمي ',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                    // MyAppp(),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AL3omal(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'اعضاء هيئة التدريس',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => El3omalelEdareen(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      ' الاداريين',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Alma3amel(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'المعامل ',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Tawzee3Altolap(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'توزيع الطلاب ',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NashatAtolap(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'نشاط الطلاب',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Anwa3elkotb(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      ' أنواع الكتب',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator1') ? true : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Almaktba(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      ' المكتبة',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => a3dadAl5rgeen(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'اعداد الخرجين',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Alasttla3at(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'الاستطلاعات',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => anaserAlasttla3at(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'عناصر الاستطلاعات',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Mo3amalatALtolap(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'معاملات الطلاب',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Alab7as(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'الابحاث',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: (role == 'creator2' || role == 'admin')
-                              ? true
-                              : false,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Alprotocol(),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: const [
-                                    Text(
-                                      'البرتوكول',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 400,
-                          height: 1,
-                          child: Divider(
-                            color: Color(0xfff4f4f8),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Row(
-                            children: const [
-                              Text(
-                                '    Settings ',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              Icon(Icons.settings_outlined)
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            username = null;
-                            email = null;
-                            jwt = null;
-                            cachehelper.deletedata(key: "username");
-                            cachehelper.deletedata(key: "email");
-                            cachehelper.deletedata(key: "jwt").then((value) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => loginqualityapp()),
-                              );
-                              Fluttertoast.showToast(
-                                msg: "تم تسجيل الخروج بنجاح ",
-                                textColor: Colors.white,
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                backgroundColor: Colors.indigo,
-                              );
-                            });
-                          },
-                          child: Row(
-                            children: const [
-                              Text(
-                                '    Sign Out ',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              Icon(Icons.logout)
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-            ),
-          ),
-        ));
+                               Navigator.push(
+                                   context,
+                                   MaterialPageRoute(
+                                       builder: (context) => Al3am_Alacademy()));
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'العام الاكاديمي ',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                     // MyAppp(),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => AL3omal(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'اعضاء هيئة التدريس',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => El3omalelEdareen(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       ' الاداريين',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Alma3amel(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'المعامل ',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Tawzee3Altolap(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'توزيع الطلاب ',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => NashatAtolap(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'نشاط الطلاب',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Anwa3elkotb(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       ' أنواع الكتب',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator1') ? true : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Almaktba(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       ' المكتبة',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => a3dadAl5rgeen(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'اعداد الخرجين',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Alasttla3at(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'الاستطلاعات',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => anaserAlasttla3at(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'عناصر الاستطلاعات',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Mo3amalatALtolap(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'معاملات الطلاب',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Alab7as(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'الابحاث',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Visibility(
+                           visible: (role == 'creator2' || role == 'admin')
+                               ? true
+                               : false,
+                           child: InkWell(
+                             onTap: () {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                   builder: (context) => Alprotocol(),
+                                 ),
+                               );
+                             },
+                             child: Column(
+                               children: [
+                                 Row(
+                                   children: const [
+                                     Text(
+                                       'البرتوكول',
+                                       style: TextStyle(
+                                           fontSize: 20,
+                                           fontWeight: FontWeight.bold,
+                                           color: Colors.white),
+                                     ),
+                                   ],
+                                 ),
+                                 const SizedBox(
+                                   height: 15,
+                                 ),
+                               ],
+                             ),
+                           ),
+                         ),
+                         Container(
+                           width: 400,
+                           height: 1,
+                           child: const Divider(
+                             color: const Color(0xfff4f4f8),
+                           ),
+                         ),
+                         const SizedBox(
+                           height: 50,
+                         ),
+                         InkWell(
+                           onTap: () {},
+                           child: Row(
+                             children: const [
+                               Text(
+                                 '    Settings ',
+                                 style: TextStyle(
+                                     fontSize: 20,
+                                     fontWeight: FontWeight.bold,
+                                     color: Colors.white),
+                               ),
+                               Icon(Icons.settings_outlined)
+                             ],
+                           ),
+                         ),
+                         const SizedBox(
+                           height: 30,
+                         ),
+                         InkWell(
+                           onTap: () {
+                             username = null;
+                             email = null;
+                             jwt = null;
+                             cachehelper.deletedata(key: "username");
+                             cachehelper.deletedata(key: "email");
+                             cachehelper.deletedata(key: "jwt").then((value) {
+                               Navigator.pushReplacement(
+                                 context,
+                                 MaterialPageRoute(
+                                     builder: (context) => loginqualityapp()),
+                               );
+                               Fluttertoast.showToast(
+                                 msg: "تم تسجيل الخروج بنجاح ",
+                                 textColor: Colors.white,
+                                 toastLength: Toast.LENGTH_SHORT,
+                                 gravity: ToastGravity.BOTTOM,
+                                 backgroundColor: Colors.indigo,
+                               );
+                             });
+                           },
+                           child: Row(
+                             children: const [
+                               Text(
+                                 '    Sign Out ',
+                                 style: TextStyle(
+                                     fontSize: 20,
+                                     fontWeight: FontWeight.bold,
+                                     color: Colors.white),
+                               ),
+                               Icon(Icons.logout)
+                             ],
+                           ),
+                         ),
+                       ],
+                     ),
+                   )),
+             ),
+           ),
+         ));
+    }, listener: (context,state){});
   }
 }
