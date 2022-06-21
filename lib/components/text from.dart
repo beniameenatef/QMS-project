@@ -35,9 +35,9 @@ class DefaultTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: text,
 
-        // prefixIcon: Icon(
-        //   prefix,color: AppColors.black,
-        // ),
+        prefixIcon: (prefix==null)?null :Icon(
+          prefix,color: AppColors.black,
+        ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.blue, width: 2,),

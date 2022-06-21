@@ -22,6 +22,8 @@ class AddEditResearchScreen extends StatefulWidget {
 
 class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
   TextEditingController _NameController = TextEditingController();
+  TextEditingController _ISSNController = TextEditingController();
+
 
   late Future<Researches> research;
   late Future<Oneyear> year;
@@ -36,9 +38,12 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
     super.initState();
     research = GetResearch();
     year = GetOneYears();
+    _ISSNController= TextEditingController(text: widget.object?.attributes?.ISSN);
+
     _NameController =
         TextEditingController(text: widget.object?.attributes?.RName);
     selectedValue = widget.object?.attributes?.year?.data?.attributes?.Year;
+    id=widget.object?.attributes?.year?.data?.id;
   }
 
   @override
@@ -190,6 +195,19 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
                               const SizedBox(
                                 height: 30,
                               ),
+                              DefaultTextField(
+                                  keyboardtype: TextInputType.multiline,
+                                  controller: _ISSNController,
+                                  validate: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'ادخل بعض البيانات';
+                                    }
+                                    return null;
+                                  },
+                                  text: 'ISSN'),
+                              const SizedBox(
+                                height: 30,
+                              ),
                               DefaultButton(
                                 text: (widget.object?.id == null)
                                     ? 'أضف'
@@ -203,7 +221,10 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
                                       if (form.validate()) {
                                         homecubit.get(context).PostResearch(
                                             Rname: _NameController.text,
-                                            year: id!);
+                                            year: id!,
+                                          issn: _ISSNController.text
+
+                                        );
                                         AlertText = 'تم الاضافة';
                                         Navigator.pop(
                                             context,
@@ -218,7 +239,9 @@ class _AddEditResearchScreenState extends State<AddEditResearchScreen> {
                                         homecubit.get(context).PutResearch(
                                             id: widget.object!.id!,
                                             Rname: _NameController.text,
-                                            year: id!);
+                                            year: id!,
+                                          issn: _ISSNController.text
+                                        );
                                         AlertText = 'تم التعديل';
 
                                         Navigator.pop(

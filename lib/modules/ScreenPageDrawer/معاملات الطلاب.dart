@@ -71,6 +71,8 @@ class Mo3amalatALtolap extends StatelessWidget {
                             headingRowHeight: 40,
                             dividerThickness: 3,
                             columnSpacing: 50.0,
+                            dataRowHeight: 60,
+                            showBottomBorder: true,
                             columns: const [
                               DataColumn(
                                   label: Text(
@@ -97,29 +99,26 @@ class Mo3amalatALtolap extends StatelessWidget {
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
-                              final a = snapshot.data!.data![index]?.attributes!
-                                  .academicYear!.data!.attributes!.Year
+                              final a = snapshot.data?.data?[index]?.attributes?.academicYear?.data?.attributes?.Year
                                   .toString();
-                              final b = snapshot
-                                  .data!.data![index]?.attributes!.Percentage
+                              final b = snapshot.data?.data?[index]?.attributes?.Percentage
                                   .toString();
-                              final c = snapshot.data!.data![index]?.attributes!
-                                  .surveyItem!.data!.attributes!.Description
+                              final c = snapshot.data?.data?[index]?.attributes?.surveyItem?.data?.attributes?.Description
                                   .toString();
 
                               return DataRow(
                                   cells: [
-                                    DataCell(Container(child: Text('${a}'))),
+                                    DataCell(Container(child: (a == null) ? Text("0") :Text('${a}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${b}%"))),
+                                    DataCell(Container(child: (b == null) ? Text("0") :Text("${b}%"))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${c}'))),
+                                    DataCell(Container(child: (c == null) ? Text("_") :Text('${c}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,

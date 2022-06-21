@@ -114,7 +114,7 @@ class regestersocialapp extends StatelessWidget {
                         obserText = !obserText;
                         visibalcubit.visibal();
                       },
-                      text: 'Password',
+                      text: 'Password (at least 6 digits)',
                     ),
                     const SizedBox(
                       height: 20,

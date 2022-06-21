@@ -63,27 +63,35 @@ class Al3am_Alacademy extends StatelessWidget {
                             height: 10,
                           ),
                           DataTable(
-                            columnSpacing: 50.0,
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 60,
+                            showBottomBorder: true,
                             columns: const [
-                              DataColumn(label: Text('NO.')),
+                              DataColumn(label: Text('NO.',style: TextStyle(color: AppColors.orange))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('Year')),
+                              DataColumn(label: Text('Year',style: TextStyle(color: AppColors.orange))),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(color: AppColors.orange)),
                               ),
-                              DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
                               final x = index + 1;
                               final y = snapshot
-                                  .data!.data![index].attributes!.year
+                                  .data?.data?[index].attributes?.year
                                   .toString();
 
                               return DataRow(
                                   cells: [
-                                    DataCell(Container(child: Text("${x}"))),
+                                    DataCell(Container(child: ( x == null) ? Text("0") : Text("${x}"))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
@@ -109,10 +117,6 @@ class Al3am_Alacademy extends StatelessWidget {
                                               oneyear = GetOneYears();
                                               // });
                                             }))),
-                                    const DataCell(VerticalDivider(
-                                      thickness: 3.0,
-                                      color: AppColors.blue,
-                                    )),
                                   ],
                                   onLongPress: () {
                                     // setState(() {

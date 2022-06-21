@@ -2,6 +2,7 @@ import 'package:design_ui/models/modelMaktba.dart';
 import 'package:design_ui/models/studentactivitymodel.dart';
 import 'package:design_ui/models/yearsmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../../../constant/colors.dart';
 import '../../../../models/graduatednumbrmodel.dart';
@@ -41,7 +42,7 @@ class _HomechartsState extends State<Homecharts> {
     return Scaffold(
 
       body: FutureBuilder(
-        future: Future.wait([graduatednumber,library,lab,year,studentactivity]),
+        future: Future.wait([graduatednumber,library,lab,year,studentactivity,studentdistrubution]),
         builder: (context,AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
             // List<Datum> data=[];
@@ -53,10 +54,13 @@ class _HomechartsState extends State<Homecharts> {
             // });
             // print(data);
             List<GraduatedNumberData> grad=snapshot.data![0]!.data;
-            List<Datum> library=snapshot.data![1]!.data;
-            List<Datumlab> lab=snapshot.data![2]!.data;
+            List<LibraryData> library=snapshot.data![1]!.data;
+            List<LabData> lab=snapshot.data![2]!.data;
             List<YearData> year=snapshot.data![3].data;
-            List<DatumSA> stuacti=snapshot.data![4]!.data;
+            List<StudentActivityData> stuacti=snapshot.data![4]!.data;
+            List<StudentDistributionData> studis=snapshot.data![5].data;
+
+
 
 
 
@@ -78,7 +82,9 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: ' أعداد الخريجين لاخر اربع سنوات'),
+                    title: ChartTitle(text: ' أعداد الخريجين لاخر اربع سنوات',textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)
+                    ),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -129,16 +135,19 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: ' أعداد الكتب لأخر اربع سنوات'),
+                    title: ChartTitle(text: ' أعداد الكتب لأخر اربع سنوات',
+                    textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)
+                    ),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
                     tooltipBehavior: TooltipBehavior(enable: true),
-                    series: <ChartSeries<Datum, String>>[
-                      BarSeries<Datum, String>(
+                    series: <ChartSeries<LibraryData, String>>[
+                      BarSeries<LibraryData, String>(
                           dataSource: library,
-                          xValueMapper: (Datum num, _) => num.attributes!.bookType!.data!.attributes!.type,
-                          yValueMapper: (Datum num, _) => int.parse(num.attributes!.number.toString()),
+                          xValueMapper: (LibraryData num, _) => (num.attributes?.bookType?.data?.attributes?.Type==null)? '_':num.attributes?.bookType?.data?.attributes?.Type,
+                          yValueMapper: (LibraryData num, _) => (num.attributes?.Number?.toString()==null)? 0:int.parse(num.attributes!.Number!.toString()),
 
                           name: '',
                           // Enable data label
@@ -154,16 +163,18 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: ' أعداد ألاجهزة فى المعامل'),
+                    title: ChartTitle(text: ' أعداد ألاجهزة فى المعامل',
+                        textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
                     tooltipBehavior: TooltipBehavior(enable: true),
-                    series: <ChartSeries<Datumlab, String>>[
-                      LineSeries<Datumlab, String>(
+                    series: <ChartSeries<LabData, String>>[
+                      LineSeries<LabData, String>(
                           dataSource: lab,
-                          xValueMapper: (Datumlab num, _) => num.attributes!.labNumber,
-                          yValueMapper: (Datumlab num, _) => int.parse(num.attributes!.pCnumber.toString()),
+                          xValueMapper: (LabData num, _) => num.attributes!.LabNumber,
+                          yValueMapper: (LabData num, _) => int.parse(num.attributes!.PCnumber.toString()),
 
                           name: 'PC Numbers',
                           // Enable data label
@@ -179,7 +190,10 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: 'أعداد الابحاث لأخر اربع سنوات'),
+                    title: ChartTitle(text: 'أعداد الابحاث لأخر اربع سنوات',
+                        textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)
+                    ),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -204,7 +218,9 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: '  توزيع طلاب الفرقة الاولى لأخر اربع سنوات'),
+                    title: ChartTitle(text: '  توزيع طلاب الفرقة الاولى لأخر اربع سنوات',
+                        textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -212,8 +228,8 @@ class _HomechartsState extends State<Homecharts> {
                     series: <ChartSeries<YearData, String>>[
                       LineSeries<YearData, String>(
                           dataSource: year,
-                          xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' : num.attributes?.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Male.toString()),
+                          xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Male!.toString()),
 
                           name: 'male student',
                           // Enable data label
@@ -221,7 +237,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Female!.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.Female!.toString()),
 
                           name: 'female student',
                           // Enable data label
@@ -229,7 +245,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.CS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.CS!.Number.toString()),
 
                           name: 'CS student',
                           // Enable data label
@@ -237,7 +253,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.IS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.IS!.Number.toString()),
 
                           name: 'IS student',
                           // Enable data label
@@ -245,7 +261,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) =>(num.attributes?.Year==null)? '0' : num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.AI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.AI!.Number.toString()),
 
                           name: 'AI student',
                           // Enable data label
@@ -253,7 +269,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.NI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.NI!.Number.toString()),
 
                           name: 'NI student',
                           // Enable data label
@@ -261,7 +277,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[0]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.General!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![0]!.attributes!.General!.Number.toString()),
 
                           name: 'General student',
                           // Enable data label
@@ -279,7 +295,9 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: '  توزيع طلاب الفرقة الثانية لأخر اربع سنوات'),
+                    title: ChartTitle(text: '  توزيع طلاب الفرقة الثانية لأخر اربع سنوات',
+                        textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -288,7 +306,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Male.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Male.toString()),
 
                           name: 'male student',
                           // Enable data label
@@ -296,7 +314,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![1]!.attributes!.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Female!.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.Female!.toString()),
 
                           name: 'female student',
                           // Enable data label
@@ -304,7 +322,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.CS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.CS!.Number.toString()),
 
                           name: 'CS student',
                           // Enable data label
@@ -312,7 +330,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.IS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.IS!.Number.toString()),
 
                           name: 'IS student',
                           // Enable data label
@@ -320,7 +338,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.AI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.AI!.Number.toString()),
 
                           name: 'AI student',
                           // Enable data label
@@ -328,7 +346,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.NI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.NI!.Number.toString()),
 
                           name: 'NI student',
                           // Enable data label
@@ -336,7 +354,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[1]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.General!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![1]!.attributes!.General!.Number.toString()),
 
                           name: 'General student',
                           // Enable data label
@@ -354,7 +372,8 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: '  توزيع طلاب الفرقة الثالثة لأخر اربع سنوات'),
+                    title: ChartTitle(text: '  توزيع طلاب الفرقة الثالثة لأخر اربع سنوات',textStyle:
+                    GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -363,7 +382,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![2]!.attributes!.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Male.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Male.toString()),
 
                           name: 'male student',
                           // Enable data label
@@ -371,7 +390,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes!.studentDistributions!.data![2]!.attributes!.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Female!.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.Female!.toString()),
 
                           name: 'female student',
                           // Enable data label
@@ -379,7 +398,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.CS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.CS!.Number.toString()),
 
                           name: 'CS student',
                           // Enable data label
@@ -387,7 +406,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.IS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.IS!.Number.toString()),
 
                           name: 'IS student',
                           // Enable data label
@@ -395,7 +414,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.AI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.AI!.Number.toString()),
 
                           name: 'AI student',
                           // Enable data label
@@ -403,7 +422,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.NI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.NI!.Number.toString()),
 
                           name: 'NI student',
                           // Enable data label
@@ -411,7 +430,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[2]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.General!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![2]!.attributes!.General!.Number.toString()),
 
                           name: 'General student',
                           // Enable data label
@@ -429,7 +448,8 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: '  توزيع طلاب الفرقة الرابعه لأخر اربع سنوات'),
+                    title: ChartTitle(text: '  توزيع طلاب الفرقة الرابعه لأخر اربع سنوات',textStyle:
+                    GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
@@ -438,7 +458,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.Male==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Male.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Male.toString()),
 
                           name: 'male student',
                           // Enable data label
@@ -446,7 +466,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes?.Year.toString(),
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.Female==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Female!.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.Female!.toString()),
 
                           name: 'female student',
                           // Enable data label
@@ -454,7 +474,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.CS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.CS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.CS!.Number.toString()),
 
                           name: 'CS student',
                           // Enable data label
@@ -462,7 +482,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.IS?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.IS!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.IS!.Number.toString()),
 
                           name: 'IS student',
                           // Enable data label
@@ -470,7 +490,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.AI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.AI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.AI!.Number.toString()),
 
                           name: 'AI student',
                           // Enable data label
@@ -478,7 +498,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.NI?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.NI!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.NI!.Number.toString()),
 
                           name: 'NI student',
                           // Enable data label
@@ -486,7 +506,7 @@ class _HomechartsState extends State<Homecharts> {
                       LineSeries<YearData, String>(
                           dataSource: year,
                           xValueMapper: (YearData num, _) => (num.attributes?.Year==null)? '0' :num.attributes!.Year,
-                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?[3]?.attributes?.General?.Number==null)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.General!.Number.toString()),
+                          yValueMapper: (YearData num, _) => (num.attributes?.studentDistributions?.data?.isEmpty==true)? 0 :int.parse(num.attributes!.studentDistributions!.data![3]!.attributes!.General!.Number.toString()),
 
                           name: 'General student',
                           // Enable data label
@@ -506,16 +526,17 @@ class _HomechartsState extends State<Homecharts> {
 
                     ),
                     // Chart title
-                    title: ChartTitle(text: 'ألانشطة لأخر اربع سنوات'),
+                    title: ChartTitle(text: 'الأنشطة لأخر اربع سنوات',textStyle:
+                    GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)),
                     // Enable legend
                     legend: Legend(isVisible: true),
                     // Enable tooltip
                     tooltipBehavior: TooltipBehavior(enable: true),
-                    series: <ChartSeries<DatumSA, String>>[
-                      BarSeries<DatumSA, String>(
+                    series: <ChartSeries<StudentActivityData, String>>[
+                      BarSeries<StudentActivityData, String>(
                           dataSource: stuacti,
-                          xValueMapper: (DatumSA num, _) => num.attributes!.year!.data!.attributes!.year,
-                          yValueMapper: (DatumSA num, _) => int.parse(num.attributes!.total.toString()),
+                          xValueMapper: (StudentActivityData num, _) => num.attributes!.Year!.data!.attributes!.Year,
+                          yValueMapper: (StudentActivityData num, _) => int.parse(num.attributes!.Total.toString()),
 
                           name: '',
                           // Enable data label

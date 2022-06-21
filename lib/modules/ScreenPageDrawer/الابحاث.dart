@@ -77,11 +77,27 @@ class Alab7as extends StatelessWidget {
                             columns: const [
                               DataColumn(
                                   label: Text(
+                                    'العدد',
+                                    style: TextStyle(
+                                      color: AppColors.orange,
+                                    ),
+                                  )),
+                              DataColumn(label: Text(' ')),
+                              DataColumn(
+                                  label: Text(
                                 'السنة',
                                 style: TextStyle(
                                   color: AppColors.orange,
                                 ),
                               )),
+                              DataColumn(label: Text(' ')),
+                              DataColumn(
+                                  label: Text(
+                                    'ISSN',
+                                    style: TextStyle(
+                                      color: AppColors.orange,
+                                    ),
+                                  )),
                               DataColumn(label: Text(' ')),
                               DataColumn(
                                 label: Text(
@@ -97,24 +113,33 @@ class Alab7as extends StatelessWidget {
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
-                              final a = snapshot.data!.data![index]!.attributes!
-                                  .year!.data!.attributes!.Year
-                                  .toString();
-                              final b = snapshot
-                                  .data!.data![index]!.attributes!.RName
-                                  .toString();
+                              final x=index+1;
+                              final a = snapshot.data?.data?[index]?.attributes?.year?.data?.attributes?.Year.toString();
+                              final b = snapshot.data?.data?[index]?.attributes?.RName.toString();
+                              dynamic c = (snapshot.data?.data?[index]?.attributes?.ISSN == null)? '0': snapshot.data?.data?[index]?.attributes?.ISSN.toString();
+
+
 
                               return DataRow(
                                   cells: [
-                                    DataCell(Container(child: Text('${a}'))),
+                                    DataCell(Container(child: Text('${x}'))),
+                                    const DataCell(VerticalDivider(
+                                      thickness: 3.0,
+                                      color: AppColors.blue,
+                                    )),
+                                    DataCell(Container(child: (a == null) ? Text("0") :Text('${a}'))),
+                                    const DataCell(VerticalDivider(
+                                      thickness: 3.0,
+                                      color: AppColors.blue,
+                                    )),
+                                    DataCell(Container(child:   Text('${c}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
                                     DataCell(
                                       Container(
-                                        child: Text(
-                                          "$b}",
+                                        child: (b == null) ? Text("0") :Text("$b}",
                                           maxLines: 5,
                                           overflow: TextOverflow.ellipsis,
                                         ),

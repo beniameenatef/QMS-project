@@ -219,10 +219,11 @@ class ResearchesDataAttributes {
 {
   "JournalName": null,
   "createdAt": "2022-05-24T19:12:00.292Z",
-  "updatedAt": "2022-05-24T19:12:01.316Z",
+  "updatedAt": "2022-06-20T17:21:28.639Z",
   "publishedAt": "2022-05-24T19:12:01.314Z",
   "RName": "Lamiaa F Ibrahim, Hesham A Salman, Zaki F Taha, Nadine Akkari, Ghadah Aldabbagh, Omayma Bamasak \" A survey on heterogeneous mobile networks planning in indoor dense areas\" Personal and Ubiquitous Computing",
   "Impact": null,
+  "ISSN": "5464-4547",
   "a_staff": {
     "data": null
   },
@@ -249,6 +250,7 @@ class ResearchesDataAttributes {
   String? publishedAt;
   String? RName;
   String? Impact;
+  String? ISSN;
   ResearchesDataAttributesAStaff? aStaff;
   ResearchesDataAttributesMajorOfResearch? majorOfResearch;
   ResearchesDataAttributesYear? year;
@@ -260,6 +262,7 @@ class ResearchesDataAttributes {
     this.publishedAt,
     this.RName,
     this.Impact,
+    this.ISSN,
     this.aStaff,
     this.majorOfResearch,
     this.year,
@@ -271,6 +274,7 @@ class ResearchesDataAttributes {
     publishedAt = json['publishedAt']?.toString();
     RName = json['RName']?.toString();
     Impact = json['Impact']?.toString();
+    ISSN = (json['ISSN'] != null) ? json['ISSN']?.toString() : null;
     aStaff = (json['a_staff'] != null) ? ResearchesDataAttributesAStaff.fromJson(json['a_staff']) : null;
     majorOfResearch = (json['major_of_research'] != null) ? ResearchesDataAttributesMajorOfResearch.fromJson(json['major_of_research']) : null;
     year = (json['year'] != null) ? ResearchesDataAttributesYear.fromJson(json['year']) : null;
@@ -283,6 +287,7 @@ class ResearchesDataAttributes {
     data['publishedAt'] = publishedAt;
     data['RName'] = RName;
     data['Impact'] = Impact;
+    data['ISSN'] = ISSN;
     if (aStaff != null) {
       data['a_staff'] = aStaff!.toJson();
     }
@@ -303,10 +308,11 @@ class ResearchesData {
   "attributes": {
     "JournalName": null,
     "createdAt": "2022-05-24T19:12:00.292Z",
-    "updatedAt": "2022-05-24T19:12:01.316Z",
+    "updatedAt": "2022-06-20T17:21:28.639Z",
     "publishedAt": "2022-05-24T19:12:01.314Z",
     "RName": "Lamiaa F Ibrahim, Hesham A Salman, Zaki F Taha, Nadine Akkari, Ghadah Aldabbagh, Omayma Bamasak \" A survey on heterogeneous mobile networks planning in indoor dense areas\" Personal and Ubiquitous Computing",
     "Impact": null,
+    "ISSN": "5464-4547",
     "a_staff": {
       "data": null
     },
@@ -358,10 +364,11 @@ class Researches {
       "attributes": {
         "JournalName": null,
         "createdAt": "2022-05-24T19:12:00.292Z",
-        "updatedAt": "2022-05-24T19:12:01.316Z",
+        "updatedAt": "2022-06-20T17:21:28.639Z",
         "publishedAt": "2022-05-24T19:12:01.314Z",
         "RName": "Lamiaa F Ibrahim, Hesham A Salman, Zaki F Taha, Nadine Akkari, Ghadah Aldabbagh, Omayma Bamasak \" A survey on heterogeneous mobile networks planning in indoor dense areas\" Personal and Ubiquitous Computing",
         "Impact": null,
+        "ISSN": "5464-4547",
         "a_staff": {
           "data": null
         },

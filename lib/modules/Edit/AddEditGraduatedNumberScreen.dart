@@ -41,13 +41,13 @@ class _AddEditGraduatedNumberScreenState
     year = GetOneYears();
     graduatednumber = GetGraduatedNumbers();
     _CSController =
-        TextEditingController(text: widget.object?.attributes!.CS!.Number);
+        TextEditingController(text: widget.object?.attributes?.CS?.Number);
     _ISController =
-        TextEditingController(text: widget.object?.attributes?.IS!.Number);
+        TextEditingController(text: widget.object?.attributes?.IS?.Number);
     _AIController =
-        TextEditingController(text: widget.object?.attributes!.AI!.Number);
+        TextEditingController(text: widget.object?.attributes?.AI?.Number);
     _NIController =
-        TextEditingController(text: widget.object?.attributes!.NI!.Number);
+        TextEditingController(text: widget.object?.attributes?.NI?.Number);
     selectedValue =
         widget.object?.attributes?.academicYear?.data?.attributes!.Year;
     id = widget.object?.attributes?.academicYear?.data?.id;

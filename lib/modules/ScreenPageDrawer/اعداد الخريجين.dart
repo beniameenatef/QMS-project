@@ -63,86 +63,81 @@ class a3dadAl5rgeen extends StatelessWidget {
                             ),
                             DataTable(
                               columnSpacing: 50.0,
+                              headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) {
+                                  return AppColors.blue;
+                                },
+                              ),
+                              headingRowHeight: 40,
+                              dividerThickness: 3,
+                              dataRowHeight: 80,
+                              showBottomBorder: true,
                               columns: const [
-                                DataColumn(label: Text('Year')),
+                                DataColumn(label: Text('Year',style: TextStyle(
+                                  color: AppColors.orange,
+                                ),),),
                                 DataColumn(label: Text(' ')),
-                                DataColumn(label: Text('CS')),
+                                DataColumn(label: Text('CS',style: TextStyle(
+                                  color: AppColors.orange,
+                                ),)),
                                 DataColumn(label: Text(' ')),
-                                DataColumn(label: Text('IS')),
+                                DataColumn(label: Text('IS',style: TextStyle(
+                                  color: AppColors.orange,
+                                ),)),
                                 DataColumn(label: Text(' ')),
-                                DataColumn(label: Text('AI')),
+                                DataColumn(label: Text('AI',style: TextStyle(
+                                  color: AppColors.orange,
+                                ),)),
                                 DataColumn(label: Text(' ')),
                                 DataColumn(
-                                  label: Text('NI'),
+                                  label: Text('NI',style: TextStyle(
+                                    color: AppColors.orange,
+                                  ),),
                                 ),
                                 DataColumn(label: Text(' ')),
                                 DataColumn(
-                                  label: Text('Delete'),
+                                  label: Text('Delete',style: TextStyle(
+                                    color: AppColors.orange,
+                                  ),),
                                 ),
                                 DataColumn(label: Text(' ')),
                               ],
                               rows: List.generate(snapshot.data!.data!.length,
                                   (index) {
-                                dynamic x = snapshot
-                                    .data
-                                    ?.data?[index]
-                                    ?.attributes
-                                    ?.academicYear
-                                    ?.data
-                                    ?.attributes
-                                    ?.Year
-                                    .toString();
-                                dynamic y = snapshot
-                                    .data!.data![index]!.attributes!.CS!.Number
-                                    .toString();
-                                dynamic z = snapshot
-                                    .data!.data![index]?.attributes!.IS!.Number
-                                    .toString();
-                                dynamic a = snapshot
-                                    .data!.data![index]!.attributes!.AI!.Number
-                                    .toString();
-                                dynamic b = snapshot
-                                    .data!.data![index]!.attributes!.NI!.Number
-                                    .toString();
+                                dynamic x = snapshot.data?.data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString();
+                                dynamic y = snapshot.data?.data?[index]!.attributes?.CS?.Number.toString();
+                                dynamic z = snapshot.data?.data?[index]?.attributes?.IS?.Number.toString();
+                                dynamic a = snapshot.data?.data?[index]!.attributes?.AI?.Number.toString();
+                                dynamic b = snapshot.data?.data?[index]!.attributes?.NI?.Number.toString();
                                 (x == null) ? print('') : print(x);
                                 return DataRow(
                                     cells: [
                                       DataCell(Container(
-                                          child: (x == null)
-                                              ? Text("0")
-                                              : Text("${x}"))),
+                                          child: (x == null) ? Text("0") : Text("${x}"))),
                                       const DataCell(VerticalDivider(
                                         thickness: 3.0,
                                         color: AppColors.blue,
                                       )),
                                       DataCell(Container(
-                                          child: (y == null)
-                                              ? Text("0")
-                                              : Text('${y}'))),
+                                          child: (y == null) ? Text("0") : Text('${y}'))),
                                       const DataCell(VerticalDivider(
                                         thickness: 3.0,
                                         color: AppColors.blue,
                                       )),
                                       DataCell(Container(
-                                          child: (z == null)
-                                              ? Text("0")
-                                              : Text("${z}"))),
+                                          child: (z == null) ? Text("0") : Text("${z}"))),
                                       const DataCell(VerticalDivider(
                                         thickness: 3.0,
                                         color: AppColors.blue,
                                       )),
                                       DataCell(Container(
-                                          child: (a == null)
-                                              ? Text("0")
-                                              : Text('${a}'))),
+                                          child: (a == null) ? Text("0") : Text('${a}'))),
                                       const DataCell(VerticalDivider(
                                         thickness: 3.0,
                                         color: AppColors.blue,
                                       )),
                                       DataCell(Container(
-                                          child: (b == null)
-                                              ? Text("0")
-                                              : Text('${b}'))),
+                                          child: (b == null) ? Text("0") : Text('${b}'))),
                                       const DataCell(VerticalDivider(
                                         thickness: 3.0,
                                         color: AppColors.blue,

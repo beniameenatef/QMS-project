@@ -63,44 +63,47 @@ class NashatAtolap extends StatelessWidget {
                          height: 10,
                        ),
                        DataTable(
+                         headingRowColor: MaterialStateColor.resolveWith(
+                               (states) {
+                             return AppColors.blue;
+                           },
+                         ),
+                         headingRowHeight: 40,
+                         dividerThickness: 3,
                          columnSpacing: 50.0,
+                         dataRowHeight: 60,
+                         showBottomBorder: true,
                          columns: const [
-                           DataColumn(label: Text('السنة')),
+                           DataColumn(label: Text('السنة',style: TextStyle(color: AppColors.orange))),
                            DataColumn(label: Text(' ')),
-                           DataColumn(label: Text('العدد')),
+                           DataColumn(label: Text('العدد',style: TextStyle(color: AppColors.orange))),
                            DataColumn(label: Text(' ')),
-                           DataColumn(label: Text('المجموع')),
+                           DataColumn(label: Text('المجموع',style: TextStyle(color: AppColors.orange))),
                            DataColumn(label: Text(' ')),
-                           DataColumn(label: Text('النسبة')),
+                           DataColumn(label: Text('النسبة',style: TextStyle(color: AppColors.orange))),
                            DataColumn(label: Text(' ')),
                            DataColumn(
-                             label: Text('Delete'),
+                             label: Text('Delete',style: TextStyle(color: AppColors.orange)),
                            ),
                            DataColumn(label: Text(' ')),
                          ],
                          rows:
                          List.generate(snapshot.data!.data!.length, (index) {
-                           final y = snapshot.data!.data![index].attributes!
-                               .year!.data!.attributes!.year
+                           final y = snapshot.data?.data?[index]?.attributes?.Year?.data?.attributes?.Year
                                .toString();
-                           final x = snapshot
-                               .data!.data![index].attributes!.number
+                           final x = (snapshot.data?.data?[index]?.attributes?.Number==null)? '0':snapshot.data?.data?[index]?.attributes?.Number
                                .toString();
-                           final z = snapshot
-                               .data!.data![index].attributes!.total
-                               .toString();
-                           final a = snapshot
-                               .data!.data![index].attributes!.percentage!
-                               .toString();
+                           final z = (snapshot.data?.data?[index]?.attributes?.Total ==null)? '0':snapshot.data?.data?[index]?.attributes?.Total.toString();
+                           final a =( snapshot.data?.data?[index]?.attributes?.Percentage ==null)?'0': snapshot.data?.data?[index]?.attributes?.Percentage.toString();
 
                            return DataRow(
                                cells: [
-                                 DataCell(Container(child: Text('${y}'))),
+                                 DataCell(Container(child: (y == null) ? Text("0") :Text('${y}'))),
                                  const DataCell(VerticalDivider(
                                    thickness: 3.0,
                                    color: AppColors.blue,
                                  )),
-                                 DataCell(Container(child: Text("${x}"))),
+                                 DataCell(Container(child: (x == null) ? Text("0") :Text("${x}"))),
                                  const DataCell(VerticalDivider(
                                    thickness: 3.0,
                                    color: AppColors.blue,
@@ -110,7 +113,7 @@ class NashatAtolap extends StatelessWidget {
                                    thickness: 3.0,
                                    color: AppColors.blue,
                                  )),
-                                 DataCell(Container(child: Text('${a}%'))),
+                                 DataCell(Container(child:Text('${a}%'))),
                                  const DataCell( VerticalDivider(
                                    thickness: 3.0,
                                    color: AppColors.blue,
@@ -124,7 +127,7 @@ class NashatAtolap extends StatelessWidget {
                                          onPressed: () {
                                            // setState(() {
                                             homecubit.get(context).DeleteStudentActivity(
-                                                 id: snapshot.data!.data![index].id);
+                                                 id: snapshot.data!.data![index]?.id);
                                              studentactivity =
                                                  GetStudentActivity();
                                            // });

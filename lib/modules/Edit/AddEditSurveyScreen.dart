@@ -14,7 +14,7 @@ import '../ScreenPageDrawer/عناصر الاستطلاعات.dart';
 
 class AddEditSurveyItemScreen extends StatefulWidget {
   const AddEditSurveyItemScreen({Key? key, this.object}) : super(key: key);
-  final Datuum? object;
+  final SurveyItemsData? object;
 
   @override
   _AddEditSurveyItemScreenState createState() =>
@@ -39,7 +39,7 @@ class _AddEditSurveyItemScreenState extends State<AddEditSurveyItemScreen> {
     survey = GetSurvey();
     surveyitems = GetSurveyItem();
     _DescriptionController =
-        TextEditingController(text: widget.object?.attributes!.description);
+        TextEditingController(text: widget.object?.attributes!.Description);
     selectedValue = widget.object?.attributes?.survey?.data?.attributes?.sType;
     id = widget.object?.attributes?.survey?.data?.id;
   }

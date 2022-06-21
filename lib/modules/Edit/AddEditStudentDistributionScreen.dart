@@ -18,7 +18,7 @@ import '../ScreenPageDrawer/توزيع الطلاب.dart';
 class AddEditStudentDistributionScreen extends StatefulWidget {
   const AddEditStudentDistributionScreen({Key? key, this.object})
       : super(key: key);
-  final DatumSD? object;
+  final StudentDistributionData? object;
 
   @override
   _AddEditStudentDistributionScreenState createState() =>
@@ -50,22 +50,22 @@ class _AddEditStudentDistributionScreenState
     year = GetOneYears();
     studentdistribution = GetStudentDistrubtion();
     _GeneralController =
-        TextEditingController(text: widget.object?.attributes!.general?.number);
+        TextEditingController(text: widget.object?.attributes!.General?.Number);
     _NIController =
-        TextEditingController(text: widget.object?.attributes!.ni?.number);
+        TextEditingController(text: widget.object?.attributes!.NI?.Number);
     _AIController =
-        TextEditingController(text: widget.object?.attributes!.ai?.number);
+        TextEditingController(text: widget.object?.attributes!.AI?.Number);
     _ISController = TextEditingController(
-        text: widget.object?.attributes!.attributesIs?.number);
+        text: widget.object?.attributes!.IS?.Number);
     _CSController =
-        TextEditingController(text: widget.object?.attributes!.cs?.number);
+        TextEditingController(text: widget.object?.attributes!.CS?.Number);
     _FemaleController =
-        TextEditingController(text: widget.object?.attributes!.female);
+        TextEditingController(text: widget.object?.attributes!.Female);
     _MaleController =
-        TextEditingController(text: widget.object?.attributes!.male);
+        TextEditingController(text: widget.object?.attributes!.Male);
     _LevelController = TextEditingController(
-        text: widget.object?.attributes!.level.toString());
-    selectedValue = widget.object?.attributes?.year?.data?.attributes?.year;
+        text: widget.object?.attributes!.Level.toString());
+    selectedValue = widget.object?.attributes?.year?.data?.attributes?.Year;
     id = widget.object?.attributes?.year?.data?.id;
   }
 

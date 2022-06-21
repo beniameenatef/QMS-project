@@ -64,21 +64,36 @@ class Alasttla3at extends StatelessWidget {
                             height: 10,
                           ),
                           DataTable(
-                            columnSpacing: 50.0,
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 50,
+                            showBottomBorder: true,
                             columns: const [
-                              DataColumn(label: Text('العدد')),
+                              DataColumn(label: Text('العدد',style: TextStyle(
+                                color: AppColors.orange,
+                              ),)),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('نوع الاستطلاع')),
+                              DataColumn(label: Text('نوع الاستطلاع',style: TextStyle(
+                                color: AppColors.orange,
+                              ),)),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(
+                                  color: AppColors.orange,
+                                ),),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
                               final a = snapshot
-                                  .data!.data![index].attributes!.sType
+                                  .data?.data?[index].attributes?.sType
                                   .toString();
                               final b = index + 1;
 
@@ -89,7 +104,7 @@ class Alasttla3at extends StatelessWidget {
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${a}"))),
+                                    DataCell(Container(child:(a == null) ? Text("0") : Text("${a}"))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,

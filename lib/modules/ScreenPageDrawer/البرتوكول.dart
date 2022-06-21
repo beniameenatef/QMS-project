@@ -71,6 +71,9 @@ class Alprotocol extends StatelessWidget {
                             headingRowHeight: 40,
                             dividerThickness: 3,
                             columnSpacing: 50.0,
+                            showBottomBorder: true,
+                            dataRowHeight: 60,
+
                             columns: const [
                               DataColumn(
                                   label: Text(
@@ -91,17 +94,16 @@ class Alprotocol extends StatelessWidget {
                               )),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(color: AppColors.orange)),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
                               final a = snapshot
-                                  .data!.data![index]!.attributes!.Name!
+                                  .data?.data?[index]?.attributes?.Name
                                   .toString();
-                              final b = snapshot.data!.data![index]!.attributes!
-                                  .protocolType!.data!.attributes!.pType
+                              final b = snapshot.data?.data?[index]?.attributes?.protocolType?.data?.attributes?.pType
                                   .toString();
                               final c = index + 1;
 
@@ -112,12 +114,12 @@ class Alprotocol extends StatelessWidget {
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${a}"))),
+                                    DataCell(Container(child:(a == null) ? Text("0") : Text("${a}"))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${b}'))),
+                                    DataCell(Container(child:( b == null) ? Text("0") : Text('${b}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,

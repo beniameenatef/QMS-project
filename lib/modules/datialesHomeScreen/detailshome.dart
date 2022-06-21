@@ -1,18 +1,21 @@
 import 'package:design_ui/bloc/home/homecubit.dart';
 import 'package:design_ui/bloc/home/homestate.dart';
 import 'package:design_ui/bloc/login/cubitlogin.dart';
+import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/modules/Drawer/drawer.dart';
-import 'package:design_ui/modules/login/user%20data.dart';
 import 'package:design_ui/network/http/HttpGet.dart';
 import 'package:design_ui/shared/shared%20preference.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../login/user data.dart';
+
 class detailshomePage extends StatelessWidget {
   const detailshomePage({Key? key,this.role,  this.child}) : super(key: key);
   final Widget ?child;
   final String? role;
+
 
 
   @override
@@ -30,7 +33,7 @@ class detailshomePage extends StatelessWidget {
         var cubitnavbar = homecubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white24,
+            backgroundColor: AppColors.blue,
             elevation: 0,
             bottomOpacity: 0,
             // toolbarHeight: 80,
@@ -38,7 +41,7 @@ class detailshomePage extends StatelessWidget {
               IconButton(onPressed: (){
                logincubit.get(context). GetUserData(jwt: jwt);
 
-              }, icon: Icon(Icons.keyboard_option_key),color: Colors.red,)
+              }, icon: Icon(Icons.refresh),color: AppColors.orange,)
             ],
             leading: (role == null)? IconButton(
               color: Color(0xFF2F2F31),
@@ -54,7 +57,7 @@ class detailshomePage extends StatelessWidget {
             IconButton(
               color: Color(0xFF2F2F31),
               onPressed: () {
-                print('guest');
+                print('visitor');
                 Navigator.pop(context);
               },
               icon: const Icon(
@@ -130,8 +133,7 @@ class detailshomePage extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: 'profile'),
-               BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: 'Creators'),
+
             ],
           ),
         );

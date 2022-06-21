@@ -31,14 +31,6 @@ class SelectionScreen extends StatelessWidget {
 
             ),
             tabs: const [
-
-              Text(
-                'Overview',
-                style: TextStyle(
-                    fontFamily: 'Raleway',
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w600),
-              ),
               Text(
                 'Charts',
                 style: TextStyle(
@@ -47,15 +39,16 @@ class SelectionScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600),
               ),
               Text(
-                'Tables',
+                'Overview',
                 style: TextStyle(
                     fontFamily: 'Raleway',
                     fontSize: 17.0,
                     fontWeight: FontWeight.w600),
               ),
+
+
             ],
             views: const [
-              Caroussel(),
               Caroussel(),
               Caroussel(),
             ],

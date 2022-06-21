@@ -17,7 +17,7 @@ import '../ScreenPageDrawer/نشاط الطلاب.dart';
 
 class AddEditStudentActivityScreen extends StatefulWidget {
   const AddEditStudentActivityScreen({Key? key, this.object}) : super(key: key);
-  final DatumSA? object;
+  final StudentActivityData? object;
 
   @override
   _AddEditStudentActivityScreenState createState() =>
@@ -44,13 +44,12 @@ class _AddEditStudentActivityScreenState
     studentactivity = GetStudentActivity();
     year = GetOneYears();
     _TotalController =
-        TextEditingController(text: widget.object?.attributes!.total);
+        TextEditingController(text: widget.object?.attributes!.Total);
     _NumberController =
-        TextEditingController(text: widget.object?.attributes!.number);
-    _PercentageController = TextEditingController(
-        text: widget.object?.attributes!.percentage.toString());
-    selectedValue = widget.object?.attributes?.year?.data?.attributes?.year;
-    id = widget.object?.attributes?.year?.data?.id;
+        TextEditingController(text: widget.object?.attributes!.Number);
+    _PercentageController = TextEditingController(text: widget.object?.attributes?.Percentage);
+    selectedValue = widget.object?.attributes?.Year?.data?.attributes?.Year;
+    id = widget.object?.attributes?.Year?.data?.id;
   }
 
   @override

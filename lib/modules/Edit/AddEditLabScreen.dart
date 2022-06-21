@@ -14,7 +14,7 @@ import '../ScreenPageDrawer/المعامل.dart';
 
 class AddEditLabScreen extends StatefulWidget {
   const AddEditLabScreen({Key? key, this.object}) : super(key: key);
-  final Datumlab? object;
+  final LabData? object;
 
   @override
   _AddEditLabScreenState createState() => _AddEditLabScreenState();
@@ -37,10 +37,11 @@ class _AddEditLabScreenState extends State<AddEditLabScreen> {
     lab = GetLab();
     mstaff = GetMstaff();
     _LabNumberController =
-        TextEditingController(text: widget.object?.attributes!.labNumber);
+        TextEditingController(text: widget.object?.attributes?.LabNumber);
     _PCNumberController =
-        TextEditingController(text: widget.object?.attributes!.pCnumber);
-    selectedValue = widget.object?.attributes?.mid?.data?.attributes?.name;
+        TextEditingController(text: widget.object?.attributes?.PCnumber);
+    selectedValue = widget.object?.attributes?.MID?.data?.attributes?.Name;
+    id=widget.object?.attributes?.MID?.data?.id;
   }
   @override
   Widget build(BuildContext context) {

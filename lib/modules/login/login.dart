@@ -36,6 +36,34 @@ class loginqualityapp extends StatelessWidget {
           cachehelper.savedata(
               key: 'visible', value: role);
           cachehelper.savedata(
+              key: 'gradnumber', value: Rgradnumber);
+          cachehelper.savedata(
+              key: 'academicyear', value: Racademicyear);
+          cachehelper.savedata(
+              key: 'Astaff', value: RAstaff);
+          cachehelper.savedata(
+              key: 'Mstaff', value: RMstaff);
+          cachehelper.savedata(
+              key: 'lab', value: Rlab);
+          cachehelper.savedata(
+              key: 'studDistribution', value: RstudDistribution);
+          cachehelper.savedata(
+              key: 'studActivity', value: RstudActivity);
+          cachehelper.savedata(
+              key: 'bookType', value: RbookType);
+          cachehelper.savedata(
+              key: 'library', value: Rlibrary);
+          cachehelper.savedata(
+              key: 'survey', value: Rsurvey);
+          cachehelper.savedata(
+              key: 'surveyItem', value: RsurveyItem);
+          cachehelper.savedata(
+              key: 'studTransaction', value: RstudTransaction);
+          cachehelper.savedata(
+              key: 'research', value: Rresearch);
+          cachehelper.savedata(
+              key: 'protocol', value: Rprotocol);
+          cachehelper.savedata(
               key: 'email', value: email);
           cachehelper
               .savedata(key: 'jwt', value: jwt)
@@ -115,7 +143,7 @@ class loginqualityapp extends StatelessWidget {
                       DefaultTextField(
                         controller: emaillogincontroller,
                         text: 'email',
-                        prefix: Icons.email,
+                        prefix: Icons.email_outlined,
                         validate: (value) {
                           if (value!.isEmpty) {
                             return ('email address must not be empty');
@@ -172,14 +200,15 @@ class loginqualityapp extends StatelessWidget {
                       ),
                       Center(
                           child: DefaultButton(
-                        text: 'Guest User',
+                        text: 'visitor',
                         color: AppColors.blue,
                         onpressed: () {
+                          role='visitor';
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    detailshomePage(role: "guest")),
+                                    detailshomePage(role: "visitor")),
                           );
                         },
                       )),

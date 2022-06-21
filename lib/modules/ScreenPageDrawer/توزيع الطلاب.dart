@@ -63,105 +63,116 @@ class Tawzee3Altolap extends StatelessWidget {
                             height: 10,
                           ),
                           DataTable(
-                            columnSpacing: 50.0,
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 60,
+                            showBottomBorder: true,
                             columns: const [
-                              DataColumn(label: Text('السنة')),
+                              DataColumn(label: Text('السنة',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('المستوى')),
+                              DataColumn(label: Text('المستوى',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('بنين')),
+                              DataColumn(label: Text('بنين',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('بنات')),
+                              DataColumn(label: Text('بنات',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('CS')),
+                              DataColumn(label: Text('CS',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('IS')),
+                              DataColumn(label: Text('IS',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('AI')),
+                              DataColumn(label: Text('AI',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('NI')),
+                              DataColumn(label: Text('NI',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('General')),
+                              DataColumn(label: Text('General',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(
+                                  color: AppColors.orange,
+                                )),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
-                              final a = snapshot.data!.data![index].attributes!
-                                  .year!.data!.attributes!.year
-                                  .toString();
-                              final b = snapshot
-                                  .data!.data![index].attributes!.level
-                                  .toString();
-                              final c = snapshot
-                                  .data!.data![index].attributes!.cs!.number
-                                  .toString();
-                              final d = snapshot.data!.data![index].attributes!
-                                  .attributesIs!.number
-                                  .toString();
-                              final e = snapshot
-                                  .data!.data![index].attributes!.ai!.number
-                                  .toString();
-                              final f = snapshot
-                                  .data!.data![index].attributes!.ni!.number
-                                  .toString();
-                              final g = snapshot.data!.data![index].attributes!
-                                  .general!.number
-                                  .toString();
-                              final h = snapshot
-                                  .data!.data![index].attributes!.male
-                                  .toString();
-                              final i = snapshot
-                                  .data!.data![index].attributes!.female
-                                  .toString();
+                              final a = snapshot.data?.data?[index]?.attributes?.year?.data?.attributes?.Year.toString();
+                              final b = snapshot.data?.data?[index]?.attributes?.Level.toString();
+                              final c = snapshot.data?.data?[index]?.attributes?.CS?.Number.toString();
+                              final d = snapshot.data?.data?[index]?.attributes?.IS?.Number.toString();
+                              final e = snapshot.data?.data?[index]?.attributes?.AI?.Number.toString();
+                              final f = snapshot.data?.data?[index]?.attributes?.NI?.Number.toString();
+                              final g = snapshot.data?.data?[index]?.attributes?.General?.Number.toString();
+                              final h = snapshot.data?.data?[index]?.attributes?.Male.toString();
+                              final i = snapshot.data?.data?[index]?.attributes?.Female.toString();
 
                               return DataRow(
                                   cells: [
-                                    DataCell(Container(child: Text('${a}'))),
+                                    DataCell(Container(child: (a == null) ? Text("0") :Text('${a}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${b}")),
+                                    DataCell(Container(child: (b == null) ? Text("0") :Text("${b}")),
                                         onTap: () {}),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${h}'))),
+                                    DataCell(Container(child:(h == null) ? Text("0") : Text('${h}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${i}'))),
+                                    DataCell(Container(child: (i == null) ? Text("0") :Text('${i}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${c}'))),
+                                    DataCell(Container(child: (c == null) ? Text("0") :Text('${c}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${d}'))),
+                                    DataCell(Container(child: (d == null) ? Text("0") :Text('${d}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${e}'))),
+                                    DataCell(Container(child: (e == null) ? Text("0") :Text('${e}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${f}'))),
+                                    DataCell(Container(child: (f == null) ? Text("0") :Text('${f}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${g}'))),
+                                    DataCell(Container(child: (g == null) ? Text("0") :Text('${g}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
@@ -178,7 +189,7 @@ class Tawzee3Altolap extends StatelessWidget {
                                                   .get(context)
                                                   .DeleteStudentDistrubtion(
                                                       id: snapshot.data!
-                                                          .data![index].id);
+                                                          .data![index]?.id);
                                               studentdistriubtion =
                                                   GetStudentDistrubtion();
                                               // });

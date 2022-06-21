@@ -66,26 +66,43 @@ class AL3omal extends StatelessWidget {
                             height: 10,
                           ),
                           DataTable(
-                            columnSpacing: 50.0,
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 50,
+                            showBottomBorder: true,
                             columns: const [
-                              DataColumn(label: Text('العدد')),
+                              DataColumn(label: Text('العدد',style: TextStyle(
+                                color: AppColors.orange,
+                              ),)),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('الأسم')),
+                              DataColumn(label: Text('الأسم',style: TextStyle(
+                                color: AppColors.orange,
+                              ),)),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('المسمى الوظيفى')),
+                              DataColumn(label: Text('المسمى الوظيفى',style: TextStyle(
+                                color: AppColors.orange,
+                              ),)),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(
+                                  color: AppColors.orange,
+                                )),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
                               final y = snapshot
-                                  .data!.data![index].attributes!.name
+                                  .data?.data?[index].attributes?.name
                                   .toString();
                               final x = snapshot
-                                  .data!.data![index].attributes!.job
+                                  .data?.data?[index].attributes?.job
                                   .toString();
                               final z = index + 1;
 
@@ -96,13 +113,13 @@ class AL3omal extends StatelessWidget {
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${y}")),
+                                    DataCell(Container(child: (y == null) ? Text("0") :Text("${y}")),
                                         onTap: () {}),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${x}'))),
+                                    DataCell(Container(child:(x == null) ? Text("0") : Text('${x}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,

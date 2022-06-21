@@ -109,8 +109,7 @@ class adaretalgouda extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: 'profile'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: 'settings'),
+
             ],
           ),
         );

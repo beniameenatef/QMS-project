@@ -368,7 +368,7 @@ import '../ScreenPageDrawer/المكتبة.dart';
 
 class AddEditLibraryScreen extends StatefulWidget {
   AddEditLibraryScreen({Key? key, this.object}) : super(key: key);
-  final Datum? object;
+  final LibraryData? object;
 
   @override
   _AddEditLibraryScreenState createState() => _AddEditLibraryScreenState();
@@ -397,11 +397,11 @@ class _AddEditLibraryScreenState extends State<AddEditLibraryScreen> {
     library = GetLibrary();
 
     _NumberController =
-        TextEditingController(text: widget.object?.attributes!.number);
+        TextEditingController(text: widget.object?.attributes!.Number);
     selectedValue =
-        widget.object?.attributes?.academicYear?.data?.attributes?.year;
+        widget.object?.attributes?.academicYear?.data?.attributes?.Year;
     selectedValue2 =
-        widget.object?.attributes?.bookType?.data?.attributes?.type;
+        widget.object?.attributes?.bookType?.data?.attributes?.Type;
     id = widget.object?.attributes?.academicYear?.data?.id;
     id2 = widget.object?.attributes?.bookType?.data?.id;
   }

@@ -49,16 +49,7 @@ class Almaktba extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Color(0xFFF1770D)),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Column(
-                    children: [
-                      Icon(Icons.edit),
-                      Text('Edit'),
-                    ],
-                  ),
-                )
+
                 // InkWell(
                 //   onTap: ()
                 //   {
@@ -70,7 +61,7 @@ class Almaktba extends StatelessWidget {
                 //
                 //   ],),
                 // )
-              ],
+
             ),
             body: FutureBuilder<Library>(
               future: library,
@@ -88,64 +79,58 @@ class Almaktba extends StatelessWidget {
                             height: 20,
                           ),
                           DataTable(
-                            columnSpacing: 38.0,
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 60,
+                            showBottomBorder: true,
                             columns: [
-                              DataColumn(label: Text('Year')),
+                              DataColumn(label: Text('Year',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('Book Type')),
+                              DataColumn(label: Text('Book Type',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('Number')),
+                              DataColumn(label: Text('Number',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(
+                                  color: AppColors.orange,
+                                )),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
-                              dynamic y = snapshot
-                                  .data!
-                                  .data![index]
-                                  .attributes!
-                                  .academicYear!
-                                  .data!
-                                  .attributes!
-                                  .year
-                                  .toString();
-                              dynamic x = snapshot.data!.data![index]
-                                  .attributes!.bookType!.data!.attributes!.type
-                                  .toString();
-                              dynamic z = snapshot
-                                  .data!.data![index].attributes!.number;
+                              dynamic y = snapshot.data?.data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString();
+                              dynamic x = snapshot.data?.data?[index]?.attributes?.bookType?.data?.attributes?.Type.toString();
+                              dynamic z = snapshot.data?.data?[index]?.attributes?.Number;
 
                               return DataRow(
                                   cells: [
-                                    // DataCell(Container(width: 75, child: TextFormField(controller:edit  ,
-                                    //     keyboardType:TextInputType.name ,
-                                    //     decoration: InputDecoration(hintText:"${y}" ),
-                                    //     )
-                                    // )
-                                    // ),
                                     DataCell(Container(
-                                        child: (y == Null)
-                                            ? Text(" ")
-                                            : Text('${y}'))),
+                                        child: (y == null) ? Text("0") :Text('${y}'))),
                                     DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
                                     DataCell(Container(
-                                        child: (x == Null)
-                                            ? Text(' ')
-                                            : Text('${x}'))),
+                                        child: (x == null) ? Text("_") :Text('${x}'))),
                                     DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
                                     DataCell(Container(
-                                        child: (z == Null)
-                                            ? Text(" ")
-                                            : Text('${z}'))),
+                                        child:(z == null) ? Text("0") : Text('${z}'))),
                                     DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
@@ -161,7 +146,7 @@ class Almaktba extends StatelessWidget {
                                               homecubit
                                                   .get(context)
                                                   .DeleteLibrary(snapshot
-                                                      .data!.data![index].id);
+                                                      .data!.data![index]?.id);
                                               // homecubit.get(context).GetLibrary();
                                               library = GetLibrary();
 

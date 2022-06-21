@@ -60,31 +60,48 @@ class Alma3amel extends StatelessWidget {
                             height: 10,
                           ),
                           DataTable(
-                            columnSpacing: 50.0,
-                            columns: const [
-                              DataColumn(label: Text('العدد')),
+                            headingRowColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                return AppColors.blue;
+                              },
+                            ),
+                            headingRowHeight: 40,
+                            dividerThickness: 3,
+                            columnSpacing: 30.0,
+                            dataRowHeight: 60,
+                            showBottomBorder: true,                            columns: const [
+                              DataColumn(label: Text('العدد',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('رقم المعمل')),
+                              DataColumn(label: Text('رقم المعمل',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('عدد الاجهزة')),
+                              DataColumn(label: Text('عدد الاجهزة',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
-                              DataColumn(label: Text('العامل المسئول')),
+                              DataColumn(label: Text('العامل المسئول',style: TextStyle(
+                                color: AppColors.orange,
+                              ))),
                               DataColumn(label: Text(' ')),
                               DataColumn(
-                                label: Text('Delete'),
+                                label: Text('Delete',style: TextStyle(
+                                  color: AppColors.orange,
+                                )),
                               ),
                               DataColumn(label: Text(' ')),
                             ],
                             rows: List.generate(snapshot.data!.data!.length,
                                 (index) {
                               final y = snapshot
-                                  .data!.data![index].attributes!.labNumber
+                                  .data?.data?[index]?.attributes?.LabNumber
                                   .toString();
                               final x = snapshot
-                                  .data!.data![index].attributes!.pCnumber
+                                  .data?.data?[index]?.attributes?.PCnumber
                                   .toString();
-                              final a = snapshot.data!.data![index].attributes!
-                                  .mid!.data!.attributes!.name
+                              final a = snapshot.data?.data?[index]?.attributes?.MID?.data?.attributes?.Name
                                   .toString();
                               final z = index + 1;
 
@@ -95,18 +112,17 @@ class Alma3amel extends StatelessWidget {
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text("${y}")),
-                                        onTap: () {}),
+                                    DataCell(Container(child: (y == null) ? Text("0") :Text("${y}")),),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${x}'))),
+                                    DataCell(Container(child: (x == null) ? Text("0") :Text('${x}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
                                     )),
-                                    DataCell(Container(child: Text('${a}'))),
+                                    DataCell(Container(child: (a == null) ? Text("_") :Text('${a}'))),
                                     const DataCell(VerticalDivider(
                                       thickness: 3.0,
                                       color: AppColors.blue,
@@ -121,7 +137,7 @@ class Alma3amel extends StatelessWidget {
                                               // setState(() {
                                               homecubit.get(context).DeleteLab(
                                                   id: snapshot
-                                                      .data!.data![index].id);
+                                                      .data!.data![index]?.id);
                                               lab = GetLab();
 
                                               // });

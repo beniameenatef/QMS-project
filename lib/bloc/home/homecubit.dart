@@ -37,7 +37,6 @@ class homecubit extends Cubit<qualityhomestates> {
   List<Widget> screenNavigationbar = [
     homescreen(),
     profile(),
-    Creators(),
   ];
 
   void changebottomnavifationbar(int index) {
@@ -48,13 +47,9 @@ class homecubit extends Cubit<qualityhomestates> {
 
   int currnetindextabbar = 0;
   List<Widget> screentabbar = [
-    Homeoverview(),
     Homecharts(),
-    TablesHome(),
-    TablesHome(),
-    TablesHome(),
-    TablesHome(),
-    TablesHome(),
+    Homeoverview(),
+
   ];
 
   void Homechangetapappbar(int index) {
@@ -869,7 +864,7 @@ emit(qualityputgraduatednumberloadingstate());
 
   Researches? modelresearch;
 
-  Future<Researches?> PostResearch({String? Rname, int? year}) async {
+  Future<Researches?> PostResearch({String? Rname, int? year,String? issn}) async {
     emit(qualitypostresearchloadingstate());
     dynamic api =
         'https://qms-application.herokuapp.com/api/researches?populate=*';
@@ -880,7 +875,11 @@ emit(qualityputgraduatednumberloadingstate());
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<dynamic, dynamic>{
-          "data": {"RName": "${Rname.toString()}", "year": year}
+          "data": {
+            "RName": "${Rname.toString()}",
+            "year": year,
+            "ISSN":"${issn.toString()}"
+          }
         }))
         .then((value) {
       if (value.statusCode == 200) {
@@ -898,7 +897,7 @@ emit(qualityputgraduatednumberloadingstate());
     });
   }
 
-  Future<Researches?> PutResearch({int? id, String? Rname, int? year}) async {
+  Future<Researches?> PutResearch({int? id, String? Rname, int? year,String? issn}) async {
     emit(qualityputresearchloadingstate());
     dynamic api =
         'https://qms-application.herokuapp.com/api/researches/${id}?populate=*';
@@ -909,7 +908,12 @@ emit(qualityputgraduatednumberloadingstate());
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<dynamic, dynamic>{
-          "data": {"RName": "${Rname.toString()}", "year": year}
+          "data": {"RName": "${Rname.toString()}",
+            "year": year,
+            "ISSN":"${issn.toString()}"
+
+
+          }
         }))
         .then((value) {
       if (value.statusCode == 200) {

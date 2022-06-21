@@ -95,7 +95,7 @@ class _AddEditStudentTransactionScreenState
              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
                if (snapshot.hasData) {
                  List<Datumm>? years = snapshot.data![0]!.data;
-                 List<Datuum>? surveyitemss = snapshot.data![1].data;
+                 List<SurveyItemsData>? surveyitemss = snapshot.data![1].data;
                  return SingleChildScrollView(
                    child: Padding(
                      padding: const EdgeInsets.all(8.0),
@@ -211,9 +211,9 @@ class _AddEditStudentTransactionScreenState
                                ),
                                items: surveyitemss
                                    ?.map((item) => DropdownMenuItem(
-                                 value: item.attributes!.description,
+                                 value: item.attributes!.Description,
                                  child: Text(
-                                   ("${item.attributes!.description.toString()}"),
+                                   ("${item.attributes!.Description.toString()}"),
                                    style: const TextStyle(
                                      fontSize: 14,
                                      fontWeight: FontWeight.w500,

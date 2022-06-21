@@ -599,7 +599,7 @@ class CustomDrawer extends StatelessWidget {
                            height: 15,
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (Racademicyear == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -633,7 +633,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (RAstaff == true|| role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -666,7 +666,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (RMstaff == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -699,7 +699,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (Rlab == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -732,7 +732,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (RstudDistribution == true|| role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -765,7 +765,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (RstudActivity == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -798,7 +798,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1' || role == 'admin')
+                           visible: (RbookType == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -831,7 +831,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator1') ? true : false,
+                           visible: (Rlibrary == true|| role == 'admin') ? true : false,
                            child: InkWell(
                              onTap: () {
                                Navigator.push(
@@ -862,7 +862,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (Rgradnumber == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -895,7 +895,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (Rsurvey == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -928,7 +928,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (RsurveyItem == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -961,7 +961,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (RstudTransaction == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -994,7 +994,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (Rresearch == true|| role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -1027,7 +1027,7 @@ class CustomDrawer extends StatelessWidget {
                            ),
                          ),
                          Visibility(
-                           visible: (role == 'creator2' || role == 'admin')
+                           visible: (Rprotocol == true || role == 'admin')
                                ? true
                                : false,
                            child: InkWell(
@@ -1066,24 +1066,24 @@ class CustomDrawer extends StatelessWidget {
                              color: const Color(0xfff4f4f8),
                            ),
                          ),
-                         const SizedBox(
-                           height: 50,
-                         ),
-                         InkWell(
-                           onTap: () {},
-                           child: Row(
-                             children: const [
-                               Text(
-                                 '    Settings ',
-                                 style: TextStyle(
-                                     fontSize: 20,
-                                     fontWeight: FontWeight.bold,
-                                     color: Colors.white),
-                               ),
-                               Icon(Icons.settings_outlined)
-                             ],
-                           ),
-                         ),
+                         // const SizedBox(
+                         //   height: 50,
+                         // ),
+                         // InkWell(
+                         //   onTap: () {},
+                         //   child: Row(
+                         //     children: const [
+                         //       Text(
+                         //         '    Settings ',
+                         //         style: TextStyle(
+                         //             fontSize: 20,
+                         //             fontWeight: FontWeight.bold,
+                         //             color: Colors.white),
+                         //       ),
+                         //       Icon(Icons.settings_outlined)
+                         //     ],
+                         //   ),
+                         // ),
                          const SizedBox(
                            height: 30,
                          ),
@@ -1105,7 +1105,7 @@ class CustomDrawer extends StatelessWidget {
                                  textColor: Colors.white,
                                  toastLength: Toast.LENGTH_SHORT,
                                  gravity: ToastGravity.BOTTOM,
-                                 backgroundColor: Colors.indigo,
+                                 backgroundColor: AppColors.blue,
                                );
                              });
                            },

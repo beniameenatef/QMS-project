@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:design_ui/bloc/login/stateslogin.dart';
+import 'package:design_ui/constant/colors.dart';
 import 'package:design_ui/models/userdatamodel.dart';
 import 'package:design_ui/modules/login/user%20data.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,24 @@ emit(loginloadingstate());
         jwt = data["jwt"];
         username=data["user"]["username"];
         email=data["user"]["email"];
-        role=data["user"]["visible"];
+        Rgradnumber=data["user"]["gradnumber"];
+        Racademicyear=data["user"]["academicyear"];
+        Racademicyear=data["user"]["academicyear"];
+        RAstaff=data["user"]["Astaff"];
+        RMstaff=data["user"]["Mstaff"];
+        Rlab=data["user"]["lab"];
+        RstudDistribution=data["user"]["studDistribution"];
+        RstudActivity=data["user"]["studActivity"];
+        RbookType=data["user"]["bookType"];
+        Rlibrary=data["user"]["library"];
+        Rsurvey=data["user"]["survey"];
+        RsurveyItem=data["user"]["surveyItem"];
+        RstudTransaction=data["user"]["studTransaction"];
+        Rresearch=data["user"]["research"];
+        Rprotocol=data["user"]["protocol"];
+
+
+        //role=data["user"]["visible"];
         //avatar=data["user"]["avatar"];
         print(jwt);
         print(username);
@@ -63,7 +81,7 @@ emit(loginloadingstate());
           textColor: Colors.white,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.indigo,);
+          backgroundColor: AppColors.blue);
         return userdatamodel;
 
       } else {
@@ -78,7 +96,7 @@ emit(loginloadingstate());
         textColor: Colors.white,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.indigo,);
+        backgroundColor: Colors.red,);
       print(error.toString());
     });
 
@@ -156,7 +174,22 @@ emit(loginloadingstate());
           // 'Authorization': jwt??'',
           "email": "${email.toString()}",
           "password": "${password.toString()}",
-         "visible":"guest"
+         "visible":"guest",
+          "gradnumber":"false",
+          "academicyear":"false",
+          "Astaff":"false",
+          "Mstaff":"false",
+          "lab":"false",
+          "studDistribution":"false",
+          "studActivity":"false",
+          "bookType":"false",
+          "library":"false",
+          "survey":"false",
+          "surveyItem":"false",
+          "studTransaction":"false",
+          "research":"false",
+          "protocol":"false"
+
         }
     ).then((value)
     {
@@ -170,7 +203,7 @@ emit(loginloadingstate());
           textColor: Colors.white,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.indigo,);
+          backgroundColor: AppColors.blue,);
         print(data["jwt"]);
       } else {
         print(value.body);
@@ -184,14 +217,31 @@ emit(loginloadingstate());
          textColor: Colors.white,
          toastLength: Toast.LENGTH_SHORT,
          gravity: ToastGravity.BOTTOM,
-         backgroundColor: Colors.indigo,);
+         backgroundColor: AppColors.blue,);
        print(error.toString());
      });
 
   }
 
 
-  Future<Users?> PutUsers({int? id, String? role}) async {
+  Future<Users?> PutUsers({
+    int? id,
+    String? role,
+    bool? gradnum,
+    bool? academicy,
+    bool? astaff,
+    bool? mstaff,
+    bool? lab,
+    bool? studis,
+    bool? studact,
+    bool? booktype,
+    bool? libraray,
+    bool? survey,
+    bool? surveyitem,
+    bool? studtrans,
+    bool? research,
+    bool? protocol
+  }) async {
 emit(putuserdataloadingstate());
     dynamic api = 'https://qms-application.herokuapp.com/api/users/${id}';
 
@@ -201,7 +251,21 @@ emit(putuserdataloadingstate());
     },
         body: jsonEncode(<String,dynamic>{
 
-          "visible":"${role}"
+          "visible":"${role}",
+          "gradnumber":gradnum,
+          "academicyear":academicy,
+          "Astaff":astaff,
+          "Mstaff":mstaff,
+          "lab":lab,
+          "studDistribution":studis,
+          "studActivity":studact,
+          "bookType":booktype,
+          "library":libraray,
+          "survey":survey,
+          "surveyItem":surveyitem,
+          "studTransaction":studtrans,
+          "research":research,
+          "protocol":protocol
 
         })
     ).then((value)
@@ -238,6 +302,20 @@ emit(putuserdataloadingstate());
         username=data["username"];
         email=data["email"];
         role=data["visible"];
+        Rgradnumber=data["gradnumber"];
+        Racademicyear=data["academicyear"];
+        RAstaff=data["Astaff"];
+        RMstaff=data["Mstaff"];
+        Rlab=data["lab"];
+        RstudDistribution=data["studDistribution"];
+        RstudActivity=data["studActivity"];
+        RbookType=data["bookType"];
+        Rlibrary=data["library"];
+        Rsurvey=data["survey"];
+        RsurveyItem=data["surveyItem"];
+        RstudTransaction=data["studTransaction"];
+        Rresearch=data["research"];
+        Rprotocol=data["protocol"];
         emit(getuserdatasuccessstate(userdatamodel));
         print('new request------------------');
         //print(jwt);
