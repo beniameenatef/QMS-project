@@ -9,12 +9,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class onBoardingScrean extends StatelessWidget {
   List<boardingmodel> boarding = [
     boardingmodel(
-      image: 'assets/image/qualitylogo.jpg',
+      image: 'assets/image/factualylogo.png',
       text: "َنظام ادارة الجودة " "QMS",
       body: "تطبيق لتسهيل ادارة الجودة والتعامل معها ",
     ),
     boardingmodel(
-      image: 'assets/image/image1.png',
+      image: 'assets/image/image1.jpeg',
       text: ' تحويل النظام الورقي الي الكتروني',
       body:
       "أضافة وتعديل ومسح البيانات في الجداول\n تسهيل التعامل مع البيانات وعرضها بشكل سلس ",
@@ -22,19 +22,19 @@ class onBoardingScrean extends StatelessWidget {
       body2: "",
     ),
     boardingmodel(
-        image: 'assets/image/image2.png',
+        image: 'assets/image/image2.jpeg',
         text: 'صلاحيات الادمن',
         body:
         "جميع خدمات التطبيق له الصلاحيه التحكم فبها  وله صلاحية عمل creators للتعديل والاضافة علي بعض الجدوا ل الذي يعطيله الصلاحبة للتعديل عليها ",
         text2: "صلاحيات المستخدم",
         body2: " "),
     boardingmodel(
-        image: 'assets/image/task.png',
+        image: 'assets/image/task.jpeg',
         text: 'صلاحيات المستخدم',
         body:
         " له الصلاحية علي التحكم في بعض الجدوال المحدده له من قبل الادمن \n يمكنه رؤيه ذلك الجداول والتعديل عليها فقط عندما يجعله الادمن creator "),
     boardingmodel(
-        image: 'assets/image/task2.png',
+        image: 'assets/image/task2.jpeg',
         text: 'صلاحيات  guest User ',
         body: " له الصلاحية علي رؤية الصفحه الرئيسية واحصائيات الجودة فقط"),
   ];
