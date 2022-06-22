@@ -216,26 +216,6 @@ class loginqualityapp extends StatelessWidget {
                         height: 11,
                       ),
 
-                      // Center(
-                      //   child: ConditionalBuilder(
-                      //     condition:user1 = "null",
-                      //     builder: (context) => DefaultButton(
-                      //       color: AppColors.blue,
-                      //       text: 'user1',
-                      //       onpressed: () {
-                      //         Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(builder: (context) => AppDrawer(
-                      //               child: detailshomePage())),
-                      //         );
-                      //
-                      //       },),
-                      //
-                      //     fallback: (BuildContext context) => Center(
-                      //         child: CircularProgressIndicator()),
-                      //   ),
-                      // ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

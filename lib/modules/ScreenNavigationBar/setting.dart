@@ -232,9 +232,7 @@ class Creators extends StatelessWidget {
                                          onToggle: (val) {
                                            state.setState(() {
                                              Racademicyear = val;
-
                                            });
-
                                          },
                                        ),
                                     ],

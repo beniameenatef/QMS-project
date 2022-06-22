@@ -8,6 +8,7 @@ import '../../../../constant/colors.dart';
 import '../../../../models/graduatednumbrmodel.dart';
 import '../../../../models/labmodel.dart';
 import '../../../../models/studentdistribution.dart';
+import '../../../../models/studenttransactionmodel.dart';
 import '../../../../network/http/HttpGet.dart';
 
 
@@ -25,6 +26,8 @@ class _HomechartsState extends State<Homecharts> {
   late Future<Year> year;
   late Future<StudentDistribution> studentdistrubution;
   late Future<StudentActivity> studentactivity;
+  late Future<StudentTransaction> studenttransaction;
+
 
   @override
   void initState() {
@@ -36,13 +39,14 @@ class _HomechartsState extends State<Homecharts> {
     year=GetYears();
     studentdistrubution=GetStudentDistrubtion();
     studentactivity=GetStudentActivity();
+    studenttransaction=GetStudentTransaction();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       body: FutureBuilder(
-        future: Future.wait([graduatednumber,library,lab,year,studentactivity,studentdistrubution]),
+        future: Future.wait([graduatednumber,library,lab,year,studentactivity,studenttransaction]),
         builder: (context,AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
             // List<Datum> data=[];
@@ -58,14 +62,7 @@ class _HomechartsState extends State<Homecharts> {
             List<LabData> lab=snapshot.data![2]!.data;
             List<YearData> year=snapshot.data![3].data;
             List<StudentActivityData> stuacti=snapshot.data![4]!.data;
-            List<StudentDistributionData> studis=snapshot.data![5].data;
-
-
-
-
-
-
-
+            List<StudentTransactionData> stutrans=snapshot.data![5].data;
 
             return SingleChildScrollView(
               child: Container(
@@ -544,6 +541,38 @@ class _HomechartsState extends State<Homecharts> {
 
                     ],
                   ),
+                  Divider(thickness: 2,color: AppColors.orange,),
+                  SfCartesianChart(
+                    primaryXAxis: CategoryAxis(
+                      labelIntersectAction: AxisLabelIntersectAction.hide,
+                      maximumLabelWidth: 80,
+
+                      //labelRotation: 280
+
+                    ),
+                    // Chart title
+                    title: ChartTitle(text: 'معاملات الطلاب لأخر اربع السنوات',
+                        textStyle:
+                        GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,color: AppColors.blue)
+                    ),
+                    // Enable legend
+                    legend: Legend(isVisible: true),
+                    // Enable tooltip
+                    tooltipBehavior: TooltipBehavior(enable: true),
+                    series: <ChartSeries<StudentTransactionData, String>>[
+                      BarSeries<StudentTransactionData, String>(
+                          dataSource: stutrans,
+                          xValueMapper: (StudentTransactionData num, _) => (num.attributes?.surveyItem?.data?.attributes?.Description==null)? '_':num.attributes?.surveyItem?.data?.attributes?.Description.toString(),
+                          yValueMapper: (StudentTransactionData num, _) => (num.attributes?.Percentage?.toString()==null)? 0:int.parse(num.attributes!.Percentage.toString()),
+
+                          name: '',
+                          // Enable data label
+                          dataLabelSettings: DataLabelSettings(isVisible: true)),
+
+                    ],
+                  ),
+
+
 
 
 

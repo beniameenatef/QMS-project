@@ -16,18 +16,17 @@ class onBoardingScrean extends StatelessWidget {
     boardingmodel(
       image: 'assets/image/image1.jpeg',
       text: ' تحويل النظام الورقي الي الكتروني',
-      body:
-      "أضافة وتعديل ومسح البيانات في الجداول\n تسهيل التعامل مع البيانات وعرضها بشكل سلس ",
-      text2: "",
-      body2: "",
+      body: '''أضافة وتعديل ومسح البيانات في الجداول\n تسهيل التعامل مع البيانات وعرضها بشكل سلس ''',
+      body2: '',
+
+
     ),
     boardingmodel(
         image: 'assets/image/image2.jpeg',
         text: 'صلاحيات الادمن',
         body:
-        "جميع خدمات التطبيق له الصلاحيه التحكم فبها  وله صلاحية عمل creators للتعديل والاضافة علي بعض الجدوا ل الذي يعطيله الصلاحبة للتعديل عليها ",
-        text2: "صلاحيات المستخدم",
-        body2: " "),
+        "جميع خدمات التطبيق له الصلاحيه التحكم فيها  وله صلاحية عمل creators للتعديل والاضافة علي بعض الجداول الذي يعطيله الصلاحية للتعديل عليها ",
+        ),
     boardingmodel(
         image: 'assets/image/task.jpeg',
         text: 'صلاحيات المستخدم',
@@ -35,7 +34,7 @@ class onBoardingScrean extends StatelessWidget {
         " له الصلاحية علي التحكم في بعض الجدوال المحدده له من قبل الادمن \n يمكنه رؤيه ذلك الجداول والتعديل عليها فقط عندما يجعله الادمن creator "),
     boardingmodel(
         image: 'assets/image/task2.jpeg',
-        text: 'صلاحيات  guest User ',
+        text: 'صلاحيات  Visitor ',
         body: " له الصلاحية علي رؤية الصفحه الرئيسية واحصائيات الجودة فقط"),
   ];
   var boardcontroller = PageController();
@@ -176,9 +175,9 @@ class onBoardingScrean extends StatelessWidget {
               ],
             ),
           )),
-      SizedBox(
-        height: 70,
-      ),
+      // SizedBox(
+      //   height: 10,
+      // ),
     ],
   );
 }

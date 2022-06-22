@@ -599,9 +599,7 @@ class CustomDrawer extends StatelessWidget {
                            height: 15,
                          ),
                          Visibility(
-                           visible: (Racademicyear == true || role == 'admin')
-                               ? true
-                               : false,
+                           visible: (Racademicyear == true || role == 'admin') ? true : false,
                            child: InkWell(
                              onTap: () {
                                //MyStatefulWidget();

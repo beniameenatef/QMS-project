@@ -157,38 +157,13 @@ class regestersocialapp extends StatelessWidget {
                                 password: _passwordcontroller.text.trim());
                           }
                         },
-                        // style: ElevatedButton.styleFrom(
-                        //     primary: Colors.deepOrange[900],
-                        //     fixedSize: Size(314.0, 70.0),
-                        //     shape: RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.circular(10.0)),
-                        //     padding:
-                        //     const EdgeInsets.symmetric(vertical: 22),
-                        //     textStyle: const TextStyle(
-                        //         fontSize: 20, fontWeight: FontWeight.w700)),
-                        // child: Text('Register',style: TextStyle(color: Colors.black),)
+
                       ),
                       fallback: (BuildContext context) =>
                           Center(child: CircularProgressIndicator()),
                     ),
 
-                    // Center( child: DefaultButton(
-                    //   color:AppColors.orange ,
-                    //   text:'REGISTER',
-                    //   onpressed:()
-                    //   async {
-                    //     if(formkey.currentState!.validate())
-                    //     {
-                    //       await logincubit.get(context).SignUpUser(
-                    //          name:  _namecontroller.text.trim(),
-                    //          email:  _emailcontroller.text.trim(),
-                    //           password: _passwordcontroller.text.trim());
-                    //
-                    //
-                    //     }
-                    //
-                    //   } ,
-                    // ),)
+
                   ],
                 ),
               ),

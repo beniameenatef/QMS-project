@@ -1,4 +1,6 @@
 import 'package:design_ui/constant/colors.dart';
+import 'package:design_ui/models/Research.dart';
+import 'package:design_ui/models/protocolmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../models/Mstaffmodel.dart';
@@ -6,7 +8,9 @@ import '../../../../models/graduatednumbrmodel.dart';
 import '../../../../models/labmodel.dart';
 import '../../../../models/modelMaktba.dart';
 import '../../../../models/modelStaff.dart';
+import '../../../../models/studentactivitymodel.dart';
 import '../../../../models/studentdistribution.dart';
+import '../../../../models/studenttransactionmodel.dart';
 import '../../../../models/yearsmodel.dart';
 import '../../../../network/http/HttpGet.dart';
 
@@ -25,6 +29,12 @@ class _HomeoverviewState extends State<Homeoverview> {
   late Future<Lab> lab;
   late Future<GraduatedNumber> graduatednumber;
   late Future<StudentDistribution> studentdistriubtion;
+  late Future<StudentTransaction> studenttransaction;
+  late Future<Researches> research;
+  late Future<StudentActivity> studentactivity;
+  late Future<Protocol> protocol;
+
+
 
   @override
   void initState() {
@@ -37,6 +47,11 @@ class _HomeoverviewState extends State<Homeoverview> {
     lab = GetLab();
     graduatednumber = GetGraduatedNumbers();
     studentdistriubtion = GetStudentDistrubtion();
+    studenttransaction = GetStudentTransaction();
+    research=GetResearch();
+    studentactivity=GetStudentActivity();
+    protocol=Getprotocol();
+
   }
 
   @override
@@ -49,7 +64,11 @@ class _HomeoverviewState extends State<Homeoverview> {
         mstaff,
         lab,
         studentdistriubtion,
-        graduatednumber
+        graduatednumber,
+        studenttransaction,
+        research,
+        studentactivity,
+        protocol
       ]),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
@@ -572,83 +591,415 @@ class _HomeoverviewState extends State<Homeoverview> {
                   SizedBox(
                     height: 20,
                   ),
-                   Text(
-                    "تطور اعداد الخريجين      ",
-                    style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
+                   Container(
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.end,
+                       children: [
+                       Text(
+                         "تطور اعداد الخريجين      ",
+                         style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
 
-                    textAlign: TextAlign.center,
-                  ),
-                   Text(
-                    "إحصائية تطور أعداد الخريجين خلال خمس سنوات     ",
-                    style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
+                         textAlign: TextAlign.center,
+                       ),
+                       Text(
+                         "إحصائية تطور أعداد الخريجين خلال خمس سنوات     ",
+                         style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
 
-                    textAlign: TextAlign.justify,
+                         textAlign: TextAlign.justify,
+                       ),
+                       const SizedBox(
+                         height: 10,
+                       ),
+                       DataTable(
+                         columnSpacing: 0.0,
+                         headingRowColor: MaterialStateColor.resolveWith(
+                               (states) {
+                             return AppColors.blue;
+                           },
+                         ),
+                         headingRowHeight: 40,
+                         dividerThickness: 1,
+                         showBottomBorder: true,
+                         columns:  [
+                           DataColumn(label: Text('الاجمالى',
+                               style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                           DataColumn(label: Text(' ')),
+                           DataColumn(
+                               label: Text(
+                                   'علوم الحاسب',
+                                   overflow: TextOverflow.ellipsis,
+                                   style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                               )),
+                           DataColumn(label: Text(' ')),
+                           DataColumn(
+                               label: Text(
+                                   'نظم المعلومات',
+                                   overflow: TextOverflow.ellipsis,
+                                   style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                               )),
+                           DataColumn(label: Text(' ')),
+                           DataColumn(label: Text('العام الجامعي',style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                         ],
+                         rows:
+                         List.generate(snapshot.data![6].data!.length, (index) {
+                           final x = snapshot.data![6].data?[index]?.attributes
+                               ?.academicYear?.data?.attributes?.Year
+                               .toString();
+                           dynamic y = int.parse(snapshot
+                               .data?[6]?.data?[index]?.attributes?.CS?.Number);
+                           dynamic z = int.parse(snapshot
+                               .data?[6]?.data?[index]?.attributes?.IS?.Number);
+
+                           return DataRow(
+                             cells: [
+                               DataCell(Container(child: Text("${y + z}"))),
+                               const DataCell(VerticalDivider(
+                                 thickness: 3.0,
+                                 color: AppColors.blue,
+                               )),
+                               DataCell(Container(child: Text("${y}"))),
+                               const DataCell(VerticalDivider(
+                                 thickness: 3.0,
+                                 color: AppColors.blue,
+                               )),
+                               DataCell(Container(child: Text('${z}'))),
+                               const DataCell(VerticalDivider(
+                                 thickness: 3.0,
+                                 color: AppColors.blue,
+                               )),
+                               DataCell(Container(child: Text("${x}"))),
+                             ],
+                           );
+                         }),
+                       ),
+                       SizedBox(
+                         height: 30,
+                       ),
+                     ],),
+                   ),
+                  Divider(height: 1,color: AppColors.orange,thickness: 2,),
+
+                  SizedBox(
+                    height: 20,
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  DataTable(
-                    columnSpacing: 0.0,
-                    headingRowColor: MaterialStateColor.resolveWith(
-                          (states) {
-                        return AppColors.blue;
-                      },
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "تعاملات الطلاب     ",
+                          style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
+
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          ":نسب الاستطلاع      ",
+                          style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
+
+                          textAlign: TextAlign.end,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              //height: 300,
+                              child: DataTable(
+                                columnSpacing: 0.0,
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                      (states) {
+                                    return AppColors.blue;
+                                  },
+                                ),
+                                headingRowHeight: 40,
+                                dividerThickness: 1,
+                                showBottomBorder: true,
+                                columns:  [
+                                  DataColumn(label: Text('النسبة',
+                                      style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                                  DataColumn(label: Text(' ')),
+                                  DataColumn(
+                                      label: Text(
+                                          'الاستطلاع',
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                                      )),
+                                ],
+                                rows:
+                                List.generate(snapshot.data![7].data!.length, (index) {
+                                  final x = snapshot.data?[7]?.data?[index]?.attributes?.surveyItem?.data?.attributes?.Description
+                                      .toString();
+                                  dynamic y = snapshot.data?[7]?.data?[index]?.attributes?.Percentage
+                                      .toString();
+
+
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(Container(child: Text("${y}%"))),
+                                      const DataCell(VerticalDivider(
+                                        thickness: 3.0,
+                                        color: AppColors.blue,
+                                      )),
+                                      DataCell(Container(child: Text("${x}"))),
+
+                                    ],
+                                  );
+                                }),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Divider(height: 1,color: AppColors.orange,thickness: 2,),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                      ],
                     ),
-                    headingRowHeight: 40,
-                    dividerThickness: 1,
-                    showBottomBorder: true,
-                    columns:  [
-                      DataColumn(label: Text('الاجمالى',
-                          style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
-                      DataColumn(label: Text(' ')),
-                      DataColumn(
-                          label: Text(
-                        'علوم الحاسب',
-                        overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
-                      )),
-                      DataColumn(label: Text(' ')),
-                      DataColumn(
-                          label: Text(
-                        'نظم المعلومات',
-                        overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
-                      )),
-                      DataColumn(label: Text(' ')),
-                      DataColumn(label: Text('العام الجامعي',style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
-                    ],
-                    rows:
-                        List.generate(snapshot.data![6].data!.length, (index) {
-                      final x = snapshot.data![6].data?[index]?.attributes
-                          ?.academicYear?.data?.attributes?.Year
-                          .toString();
-                      dynamic y = int.parse(snapshot
-                          .data?[6]?.data?[index]?.attributes?.CS?.Number);
-                      dynamic z = int.parse(snapshot
-                          .data?[6]?.data?[index]?.attributes?.IS?.Number);
-
-                      return DataRow(
-                        cells: [
-                          DataCell(Container(child: Text("${y + z}"))),
-                          const DataCell(VerticalDivider(
-                            thickness: 3.0,
-                            color: AppColors.blue,
-                          )),
-                          DataCell(Container(child: Text("${y}"))),
-                          const DataCell(VerticalDivider(
-                            thickness: 3.0,
-                            color: AppColors.blue,
-                          )),
-                          DataCell(Container(child: Text('${z}'))),
-                          const DataCell(VerticalDivider(
-                            thickness: 3.0,
-                            color: AppColors.blue,
-                          )),
-                          DataCell(Container(child: Text("${x}"))),
-                        ],
-                      );
-                    }),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Divider(height: 1,color: AppColors.orange,thickness: 2,),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white10.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "الابحاث     ",
+                          style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
+
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "الابحاث لأخر اربع سنين      ",
+                          style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
+
+                          textAlign: TextAlign.right,
+                        ),
+                        DataTable(
+                          columnSpacing: 60.0,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                                (states) {
+                              return AppColors.blue;
+                            },
+                          ),
+                          headingRowHeight: 40,
+                          dividerThickness: 1,
+                          showBottomBorder: true,
+                          columns:  [
+                            DataColumn(label: Text('ISSN',
+                                style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                            DataColumn(label: Text(' ')),
+                            DataColumn(
+                                label: Text(
+                                    'السنة',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                                )),
+                          ],
+                          rows:
+                          List.generate(snapshot.data![8].data!.length, (index) {
+                            final a = snapshot.data?[8].data?[index]?.attributes?.year?.data?.attributes?.Year.toString();
+                            dynamic c = (snapshot.data?[8].data?[index]?.attributes?.ISSN == null)? '0': snapshot.data?[8].data?[index]?.attributes?.ISSN.toString();
+
+
+
+                            return DataRow(
+                              cells: [
+                                DataCell(Container(child: Text("${c}"))),
+                                const DataCell(VerticalDivider(
+                                  thickness: 3.0,
+                                  color: AppColors.blue,
+                                )),
+                                DataCell(Container(child: Text("${a}"))),
+
+                              ],
+                            );
+                          }),
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Divider(height: 1,color: AppColors.orange,thickness: 2,),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "الأنشطة      ",
+                          style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
+
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "إحصائية تطور الأنشطة خلال أربع سنوات     ",
+                          style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
+
+                          textAlign: TextAlign.justify,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        DataTable(
+                          columnSpacing: 10.0,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                                (states) {
+                              return AppColors.blue;
+                            },
+                          ),
+                          headingRowHeight: 40,
+                          dividerThickness: 1,
+                          showBottomBorder: true,
+                          columns:  [
+                            DataColumn(label: Text('الاجمالى',
+                                style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                            DataColumn(label: Text(' ')),
+                            DataColumn(
+                                label: Text(
+                                    'العدد',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                                )),
+                            DataColumn(label: Text(' ')),
+                            DataColumn(
+                                label: Text(
+                                    'النسبة',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                                )),
+                            DataColumn(label: Text(' ')),
+                            DataColumn(label: Text('العام الجامعي',style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                          ],
+                          rows:
+                          List.generate(snapshot.data![9].data!.length, (index) {
+                            final y = snapshot.data?[9].data?[index]?.attributes?.Year?.data?.attributes?.Year
+                                .toString();
+                            final x = (snapshot.data?[9].data?[index]?.attributes?.Number==null)? '0':snapshot.data?[9].data?[index]?.attributes?.Number
+                                .toString();
+                            final z = (snapshot.data?[9].data?[index]?.attributes?.Total ==null)? '0':snapshot.data?[9].data?[index]?.attributes?.Total.toString();
+                            final a =( snapshot.data?[9].data?[index]?.attributes?.Percentage ==null)?'0': snapshot.data?[9].data?[index]?.attributes?.Percentage.toString();
+
+
+                            return DataRow(
+                              cells: [
+                                DataCell(Container(child: Text("${z}"))),
+                                const DataCell(VerticalDivider(
+                                  thickness: 3.0,
+                                  color: AppColors.blue,
+                                )),
+                                DataCell(Container(child: Text("${x}"))),
+                                const DataCell(VerticalDivider(
+                                  thickness: 3.0,
+                                  color: AppColors.blue,
+                                )),
+                                DataCell(Container(child: Text('${a}'))),
+                                const DataCell(VerticalDivider(
+                                  thickness: 3.0,
+                                  color: AppColors.blue,
+                                )),
+                                DataCell(Container(child: Text("${y}"))),
+                              ],
+                            );
+                          }),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Divider(height: 1,color: AppColors.orange,thickness: 2,),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "البرتوكول      ",
+                          style: GoogleFonts.cairo(fontSize: 20 ,fontWeight: FontWeight.bold,color: AppColors.blue),
+
+                          textAlign: TextAlign.center,
+                        ),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        DataTable(
+                          columnSpacing: 10.0,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                                (states) {
+                              return AppColors.blue;
+                            },
+                          ),
+                          headingRowHeight: 40,
+                          dividerThickness: 1,
+                          showBottomBorder: true,
+                          columns:  [
+                            DataColumn(label: Text('النوع',
+                                style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange))),
+                            DataColumn(label: Text(' ')),
+                            DataColumn(
+                                label: Text(
+                                    'البرتوكول',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.cairo(fontSize:10,fontWeight: FontWeight.bold,color: AppColors.orange)
+                                )),
+
+                          ],
+                          rows:
+                          List.generate(snapshot.data![10].data!.length, (index) {
+                            final a = snapshot
+                                .data?[10].data?[index]?.attributes?.Name
+                                .toString();
+                            final b = snapshot.data?[10].data?[index]?.attributes?.protocolType?.data?.attributes?.pType
+                                .toString();
+                            return DataRow(
+                              cells: [
+                                DataCell(Container(child: Text("${b}"))),
+                                const DataCell(VerticalDivider(
+                                  thickness: 3.0,
+                                  color: AppColors.blue,
+                                )),
+                                DataCell(Container(child: Text("${a}"))),
+                                
+                              ],
+                            );
+                          }),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                      ],),
+                  ),
+
+
                 ],
               ),
             ),
