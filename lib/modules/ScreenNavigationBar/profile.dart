@@ -138,7 +138,7 @@ class profile extends StatelessWidget {
                                       Icon(Icons.people_alt_outlined,color: AppColors.blue,),
                                        SizedBox(width: 10,),
                                        Text(
-                                        "Creators",
+                                        "Supervisors",
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w500,
                                             color: AppColors.blue,

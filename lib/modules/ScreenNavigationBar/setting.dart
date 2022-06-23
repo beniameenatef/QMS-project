@@ -44,7 +44,7 @@ class Creators extends StatelessWidget {
 
           title:
               Text(
-                'Creators',
+                'Supervisor',
                 style: TextStyle(color: Color(0xFFF1770D)),
               ),
         ),
