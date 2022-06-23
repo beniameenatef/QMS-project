@@ -72,7 +72,7 @@ class Creators extends StatelessWidget {
                          ),
                          headingRowHeight: 40,
                          dividerThickness: 3,
-                         columnSpacing: 40.0,
+                         columnSpacing: 30.0,
                          dataRowHeight: 60,
                          showBottomBorder: true,
                          columns: const [
@@ -623,7 +623,7 @@ class Creators extends StatelessWidget {
                             else  {
                               logincubit.get(context).PutUsers(
                                   id: id,
-                                  role:  'creator',
+                                  role:  'SuperVisor',
                                   studact: RstudActivity,
                                   studtrans: RstudTransaction,
                                   studis: RstudDistribution,

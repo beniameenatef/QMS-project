@@ -227,9 +227,8 @@ class _HomeoverviewState extends State<Homeoverview> {
                            ))),
                          ],
                          rows: List.generate(snapshot.data![0].data.length, (index) {
-                           final y = snapshot.data?[0]?.data?[index].attributes?.academicYear.data.attributes?.Year
-                               .toString();
-                           dynamic x = snapshot.data?[0]?.data?[index]?.attributes?.bookType?.data?.attributes?.Type.toString();
+                           final y = (snapshot.data?[0]?.data?[index].attributes?.academicYear?.data?.attributes?.Year.toString()==null)? '_':snapshot.data?[0]?.data?[index].attributes?.academicYear?.data?.attributes?.Year.toString();
+                           dynamic x = (snapshot.data?[0]?.data?[index]?.attributes?.bookType.data?.attributes?.Type.toString()==null)? '_':snapshot.data?[0]?.data?[index]?.attributes?.bookType?.data?.attributes?.Type.toString();
                            dynamic z = snapshot.data?[0]?.data?[index]?.attributes?.Number;
 
                            //final z = snapshot.data![2].data[index].attributes.job;
@@ -237,7 +236,7 @@ class _HomeoverviewState extends State<Homeoverview> {
                            return DataRow(cells: [
                              DataCell(Container(width: 75, child: Text("${y}"))),
                              DataCell(Container(child: Text('${x}'))),
-                             DataCell(Container(child: Text('${z}')))
+                             DataCell(Container(child:(z == null) ? Text("0") :  Text('${z}')))
                            ]);
                          }),
                        ),
@@ -602,7 +601,7 @@ class _HomeoverviewState extends State<Homeoverview> {
                          textAlign: TextAlign.center,
                        ),
                        Text(
-                         "إحصائية تطور أعداد الخريجين خلال خمس سنوات     ",
+                         "إحصائية تطور أعداد الخريجين خلال اربع سنوات     ",
                          style: GoogleFonts.cairo(fontSize: 15 ,fontWeight: FontWeight.bold,),
 
                          textAlign: TextAlign.justify,
@@ -642,9 +641,7 @@ class _HomeoverviewState extends State<Homeoverview> {
                          ],
                          rows:
                          List.generate(snapshot.data![6].data!.length, (index) {
-                           final x = snapshot.data![6].data?[index]?.attributes
-                               ?.academicYear?.data?.attributes?.Year
-                               .toString();
+                           final x = (snapshot.data![6].data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString()==null)?'0':snapshot.data![6].data?[index]?.attributes?.academicYear?.data?.attributes?.Year.toString();
                            dynamic y = int.parse(snapshot
                                .data?[6]?.data?[index]?.attributes?.CS?.Number);
                            dynamic z = int.parse(snapshot
@@ -727,9 +724,11 @@ class _HomeoverviewState extends State<Homeoverview> {
                                 ],
                                 rows:
                                 List.generate(snapshot.data![7].data!.length, (index) {
-                                  final x = snapshot.data?[7]?.data?[index]?.attributes?.surveyItem?.data?.attributes?.Description
+                                  final x = (snapshot.data?[7]?.data?[index]?.attributes?.surveyItem?.data?.attributes?.Description
+                                      .toString()==null)? '_':snapshot.data?[7]?.data?[index]?.attributes?.surveyItem?.data?.attributes?.Description
                                       .toString();
-                                  dynamic y = snapshot.data?[7]?.data?[index]?.attributes?.Percentage
+                                  dynamic y = ( snapshot.data?[7]?.data?[index]?.attributes?.Percentage
+                                      .toString()==null)?'0':snapshot.data?[7]?.data?[index]?.attributes?.Percentage
                                       .toString();
 
 
@@ -812,7 +811,7 @@ class _HomeoverviewState extends State<Homeoverview> {
                           ],
                           rows:
                           List.generate(snapshot.data![8].data!.length, (index) {
-                            final a = snapshot.data?[8].data?[index]?.attributes?.year?.data?.attributes?.Year.toString();
+                            final a = (snapshot.data?[8].data?[index]?.attributes?.year?.data?.attributes?.Year.toString()==null)?'0':snapshot.data?[8].data?[index]?.attributes?.year?.data?.attributes?.Year.toString();
                             dynamic c = (snapshot.data?[8].data?[index]?.attributes?.ISSN == null)? '0': snapshot.data?[8].data?[index]?.attributes?.ISSN.toString();
 
 
@@ -894,7 +893,8 @@ class _HomeoverviewState extends State<Homeoverview> {
                           ],
                           rows:
                           List.generate(snapshot.data![9].data!.length, (index) {
-                            final y = snapshot.data?[9].data?[index]?.attributes?.Year?.data?.attributes?.Year
+                            final y = ( snapshot.data?[9].data?[index]?.attributes?.Year?.data?.attributes?.Year
+                                .toString()==null)?'0':snapshot.data?[9].data?[index]?.attributes?.Year?.data?.attributes?.Year
                                 .toString();
                             final x = (snapshot.data?[9].data?[index]?.attributes?.Number==null)? '0':snapshot.data?[9].data?[index]?.attributes?.Number
                                 .toString();
@@ -975,10 +975,13 @@ class _HomeoverviewState extends State<Homeoverview> {
                           ],
                           rows:
                           List.generate(snapshot.data![10].data!.length, (index) {
-                            final a = snapshot
+                            final a = (snapshot
+                                .data?[10].data?[index]?.attributes?.Name
+                                .toString()==null)?'0':snapshot
                                 .data?[10].data?[index]?.attributes?.Name
                                 .toString();
-                            final b = snapshot.data?[10].data?[index]?.attributes?.protocolType?.data?.attributes?.pType
+                            final b = (snapshot.data?[10].data?[index]?.attributes?.protocolType?.data?.attributes?.pType
+                                .toString()==null)?'_':snapshot.data?[10].data?[index]?.attributes?.protocolType?.data?.attributes?.pType
                                 .toString();
                             return DataRow(
                               cells: [
@@ -988,7 +991,7 @@ class _HomeoverviewState extends State<Homeoverview> {
                                   color: AppColors.blue,
                                 )),
                                 DataCell(Container(child: Text("${a}"))),
-                                
+
                               ],
                             );
                           }),

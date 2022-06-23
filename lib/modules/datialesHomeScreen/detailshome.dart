@@ -52,6 +52,7 @@ class detailshomePage extends StatelessWidget {
               icon: const Icon(
                 Icons.menu,
                 size: 30,
+                color: AppColors.orange,
               ),
             ):
             IconButton(
